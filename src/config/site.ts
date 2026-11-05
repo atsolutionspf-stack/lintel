@@ -14,13 +14,17 @@ const shared = {
    * Si es `null`, el formulario abre el correo del visitante con la solicitud ya redactada.
    */
   formEndpoint: null as string | null,
-  /** Web del TPV EasyHost, para el enlace del pack Profesional. `null` = no se muestra el enlace. */
-  tpvUrl: null as string | null,
+  /**
+   * Web del TPV EasyHost, para el enlace del pack Profesional (cada idioma enlaza a su versión).
+   * `null` = no se muestra el enlace. Sustituye por el dominio definitivo cuando lo haya.
+   */
+  tpvUrl: 'https://easyhost.atsolutionspf.workers.dev' as string | null,
 };
 
 export const site = pick({
   es: {
     ...shared,
+    tpvUrl: shared.tpvUrl && `${shared.tpvUrl}/`,
     phone: '[Teléfono de contacto]',
     nav: [
       { label: 'Packs', href: '#packs' },
@@ -122,6 +126,7 @@ export const site = pick({
   },
   en: {
     ...shared,
+    tpvUrl: shared.tpvUrl && `${shared.tpvUrl}/en/`,
     phone: '[Contact phone]',
     nav: [
       { label: 'Packs', href: '#packs' },
