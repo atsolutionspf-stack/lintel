@@ -1,0 +1,65 @@
+/*
+ * TOKENS DE DISEÑO
+ * Dirección: el plano. La web se presenta como una lámina técnica: papel cuadriculado,
+ * líneas en tinta azul y anotaciones en rojo. Misma paleta y tipografías que la web del TPV.
+ */
+:root {
+  /* Papel */
+  --paper: oklch(0.982 0.004 262);
+  --paper-2: oklch(0.96 0.008 262);
+  --sheet: oklch(0.995 0.002 262);
+  --grid: oklch(0.93 0.012 262 / 0.7);
+  --grid-major: oklch(0.89 0.02 262 / 0.6);
+
+  /* Tinta */
+  --ink: oklch(0.25 0.045 265);
+  --ink-deep: oklch(0.2 0.04 265);
+  --muted: oklch(0.47 0.028 262);
+
+  /* Marca */
+  --blue: oklch(0.45 0.17 262);
+  --blue-hover: oklch(0.39 0.16 262);
+  --blue-soft: oklch(0.93 0.03 262);
+  --carmine: oklch(0.54 0.19 25); /* anotaciones, cotas y marcas */
+
+  /* Líneas */
+  --rule: oklch(0.89 0.014 262);
+  --rule-strong: oklch(0.8 0.02 262);
+
+  /* Sobre tinta */
+  --on-ink: oklch(0.96 0.008 262);
+  --on-ink-muted: oklch(0.8 0.025 262);
+  --rule-on-ink: oklch(0.96 0.008 262 / 0.18);
+
+  /* Tipografía */
+  --font-display: 'Young Serif', Georgia, serif;
+  --font-body: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-base: 1.0625rem;
+  --fs-md: 1.3125rem;
+  --fs-lg: clamp(1.45rem, 1.25rem + 0.8vw, 1.75rem);
+  --fs-xl: clamp(2rem, 1.45rem + 2.2vw, 2.85rem);
+  --fs-hero: clamp(2.75rem, 1.2rem + 6.4vw, 7rem);
+
+  /* Espaciado: escala de 4pt */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --container: 1200px;
+  --section-y: clamp(4rem, 2.5rem + 6vw, 8rem);
+  --nav-h: 68px;
+
+  --r-sm: 4px;
+  --r-md: 8px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
