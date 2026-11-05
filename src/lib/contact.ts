@@ -8,7 +8,7 @@ import { site } from '../config/site';
 
 export type ContactRequest = {
   name: string;
-  restaurant: string;
+  business: string;
   email: string;
   phone: string;
   pack: string;
@@ -29,7 +29,7 @@ export async function submitRequest(data: ContactRequest): Promise<'sent' | 'mai
   const f = site.contact;
   const body = [
     `${f.name}: ${data.name}`,
-    `${f.restaurant}: ${data.restaurant}`,
+    `${f.business}: ${data.business}`,
     `${f.email}: ${data.email}`,
     data.phone && `${f.phone}: ${data.phone}`,
     `${f.pack}: ${data.pack}`,
@@ -38,6 +38,6 @@ export async function submitRequest(data: ContactRequest): Promise<'sent' | 'mai
     .filter(Boolean)
     .join('\n');
 
-  window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(`${f.mailSubject}: ${data.restaurant}`)}&body=${encodeURIComponent(body)}`;
+  window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(`${f.mailSubject}: ${data.business}`)}&body=${encodeURIComponent(body)}`;
   return 'mailto';
 }

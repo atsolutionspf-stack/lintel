@@ -5,7 +5,7 @@ import { submitRequest } from '../lib/contact';
 import { SheetLabel } from './SheetLabel';
 
 type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
-type Field = 'name' | 'restaurant' | 'email';
+type Field = 'name' | 'business' | 'email';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -31,9 +31,9 @@ export function Contact({ pack, onPackChange }: { pack: string; onPackChange: (p
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
-    const found = Object.fromEntries((['name', 'restaurant', 'email'] as Field[]).map((f) => [f, check(f, data[f] ?? '')]));
+    const found = Object.fromEntries((['name', 'business', 'email'] as Field[]).map((f) => [f, check(f, data[f] ?? '')]));
     setErrors(found);
-    const firstInvalid = (['name', 'restaurant', 'email'] as Field[]).find((f) => found[f]);
+    const firstInvalid = (['name', 'business', 'email'] as Field[]).find((f) => found[f]);
     if (firstInvalid) {
       (form.elements.namedItem(firstInvalid) as HTMLInputElement).focus();
       return;
@@ -44,7 +44,7 @@ export function Contact({ pack, onPackChange }: { pack: string; onPackChange: (p
       const packLabel = form.querySelector<HTMLSelectElement>('select[name="pack"]')!.selectedOptions[0].text;
       const result = await submitRequest({
         name: data.name,
-        restaurant: data.restaurant,
+        business: data.business,
         email: data.email,
         phone: data.phone ?? '',
         pack: packLabel,
@@ -94,7 +94,7 @@ export function Contact({ pack, onPackChange }: { pack: string; onPackChange: (p
         <form className="form" onSubmit={onSubmit} noValidate>
           <div className="form__row">
             {input('name', t.name, 'text', 'name')}
-            {input('restaurant', t.restaurant, 'text', 'organization')}
+            {input('business', t.business, 'text', 'organization')}
           </div>
           <div className="form__row">
             {input('email', t.email, 'email', 'email')}

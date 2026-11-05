@@ -2,8 +2,8 @@ import type { PackId } from '../config/packs';
 import { site } from '../config/site';
 
 /**
- * Plano de una web de restaurante. Cada pack enciende sus capas:
- * Simple (One Page) → Avanzada (+ reservas, pedidos, carta) → Profesional (+ TPV y CRM conectados).
+ * Plano de la web de un negocio. Cada pack enciende sus capas:
+ * Simple (One Page) → Avanzada (+ reservas, pedidos, catálogo) → Profesional (+ TPV y CRM conectados).
  * Las marcas rojas numeradas corresponden a la lista de "Incluye" del pack.
  */
 const LEVEL: Record<PackId, number> = { simple: 1, avanzada: 2, profesional: 3, personalizada: 0 };
@@ -68,7 +68,7 @@ export function Blueprint({ pack, label }: { pack: PackId; label: string }) {
         <text x="572" y="414" textAnchor="end" className="bp-mono">{p.map}</text>
       </g>
 
-      {/* Avanzada: reservas, pedidos y carta */}
+      {/* Avanzada: reservas, pedidos y catálogo */}
       <g className={on(2)}>
         <rect x="440" y="82" width="56" height="20" rx="4" className="bp-sheet bp-line" />
         <text x="468" y="96" textAnchor="middle" className="bp-mono bp-mono--ink">{p.order}</text>

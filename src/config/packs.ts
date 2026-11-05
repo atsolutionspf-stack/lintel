@@ -35,7 +35,7 @@ export const webPacks: WebPack[] = pick({
       name: 'Simple',
       price: prices.packSimple,
       includesTpv: false,
-      description: 'Una web de una sola página (One Page) con la información de tu restaurante.',
+      description: 'Una web de una sola página (One Page) con la información de tu negocio.',
       features: ['Web One Page'],
       cta: 'Solicitar información',
     },
@@ -45,7 +45,7 @@ export const webPacks: WebPack[] = pick({
       price: prices.packAvanzada,
       includesTpv: false,
       description: 'Tu web con reservas y pedidos online, y más ventajas para tus clientes.',
-      features: ['Reservas online', 'Pedidos online', 'Carta digital'],
+      features: ['Reservas y citas online', 'Pedidos y venta online', 'Catálogo digital'],
       cta: 'Solicitar información',
     },
     {
@@ -73,7 +73,7 @@ export const webPacks: WebPack[] = pick({
       name: 'Simple',
       price: prices.packSimple,
       includesTpv: false,
-      description: 'A single-page (one-page) website with your restaurant’s information.',
+      description: 'A single-page (one-page) website with your business’s information.',
       features: ['One-page website'],
       cta: 'Get information',
     },
@@ -83,7 +83,7 @@ export const webPacks: WebPack[] = pick({
       price: prices.packAvanzada,
       includesTpv: false,
       description: 'Your website with online bookings and orders, plus extra perks for your customers.',
-      features: ['Online bookings', 'Online orders', 'Digital menu'],
+      features: ['Online bookings and appointments', 'Online orders and sales', 'Digital catalogue'],
       cta: 'Get information',
     },
     {
@@ -112,13 +112,13 @@ export const maintenance = pick({
     name: 'Hora de mantenimiento',
     price: prices.maintenanceHour,
     unit: '/hora',
-    description: 'Cambios en tu web o en tu carta, actualizaciones y ajustes. Se contrata por horas cuando lo necesites.',
+    description: 'Cambios en tu web o en tu catálogo, actualizaciones y ajustes. Se contrata por horas cuando lo necesites.',
   },
   en: {
     name: 'Maintenance hour',
     price: prices.maintenanceHour,
     unit: '/hour',
-    description: 'Changes to your website or menu, updates and tweaks. Booked by the hour, whenever you need it.',
+    description: 'Changes to your website or catalogue, updates and tweaks. Booked by the hour, whenever you need it.',
   },
 });
 
