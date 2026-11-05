@@ -6,9 +6,9 @@ import { pick } from '../i18n';
 
 /* Datos comunes a los dos idiomas */
 const shared = {
-  name: 'EasyHost',
+  name: 'Lintel',
   /** Email que recibe las solicitudes. Pendiente: dato real. */
-  email: 'contacto@easyhost.example',
+  email: 'hola@lintel.example',
   /**
    * URL a la que el formulario enviará los datos en JSON (POST): Formspree, un webhook, etc.
    * Si es `null`, el formulario abre el correo del visitante con la solicitud ya redactada.

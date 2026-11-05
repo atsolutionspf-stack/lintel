@@ -1,6 +1,6 @@
-# EasyHost Webs: venta de webs para restaurantes
+# Lintel: venta de webs para restaurantes
 
-Web *one page* de venta de webs de EasyHost (packs Simple, Avanzada, Profesional y Personalizada). Vite + React + TypeScript, mismo sistema que la web del TPV.
+Web *one page* de Lintel, el estudio que vende webs para restaurantes (packs Simple, Avanzada, Profesional y Personalizada; el Profesional va conectado al TPV EasyHost). Vite + React + TypeScript, mismo sistema que la web del TPV.
 
 Dirección de diseño: **el plano**. La página es una lámina técnica (papel cuadriculado, tinta azul, anotaciones en rojo) y los packs se eligen sobre un plano de web que se va construyendo: Simple → Avanzada → Profesional.
 

@@ -11,7 +11,7 @@ export function Footer() {
         <div className="titleblock">
           <div className="titleblock__brand">
             <span className="titleblock__label">{t.project}</span>
-            <strong>{site.name} Webs</strong>
+            <strong>{site.name}</strong>
             <span>{t.projectValue}</span>
           </div>
           <div>

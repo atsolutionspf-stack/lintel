@@ -1,7 +1,7 @@
 // Despliegue en Cloudflare Workers (sitio estático), igual que la web del TPV.
 // Cloudflare ejecuta `npm run build` y publica la carpeta ./dist.
 {
-  "name": "easyhost-webs",
+  "name": "lintel",
   "compatibility_date": "2025-10-01",
   "assets": {
     "directory": "./dist",

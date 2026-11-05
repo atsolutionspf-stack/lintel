@@ -4,16 +4,15 @@ export function Nav() {
   return (
     <header className="nav">
       <div className="container nav__inner">
-        <a href="#inicio" className="logo" aria-label={`${site.name} Webs`}>
+        <a href="#inicio" className="logo" aria-label={site.name}>
+          {/* Un dintel: dos pilares y la viga que los une */}
           <svg viewBox="0 0 32 32" aria-hidden="true">
-            <rect width="32" height="32" rx="7" />
-            <rect x="7" y="8" width="18" height="16" rx="2" />
-            <path d="M7 13h18" />
-            <circle cx="24" cy="24" r="4" />
+            <rect className="logo__bg" width="32" height="32" rx="7" />
+            <rect className="logo__post" x="9" y="13" width="4" height="12" />
+            <rect className="logo__post" x="19" y="13" width="4" height="12" />
+            <rect className="logo__beam" x="6" y="8" width="20" height="4.5" />
           </svg>
-          <span>
-            {site.name} <em>Webs</em>
-          </span>
+          <span>{site.name}</span>
         </a>
         <nav className="nav__links" aria-label="Menú">
           {site.nav.map((item) => (
