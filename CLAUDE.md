@@ -18,6 +18,8 @@ Hay **dos versiones publicadas** con el mismo contenido. Antes de cambiar algo, 
 | Código (este repo) | Vite + React + TypeScript | https://lintel.atsolutionspf.workers.dev (Cloudflare Worker `lintel`) |
 | Framer | Proyecto «Lintel» en el workspace de Framer de GIO | https://early-galaxy-770441.framer.app |
 
+**Desde el 9/11/2026 la versión principal es Framer.** Ahí se hizo el rediseño: portada oscura con el plano animado (`HeroBlueprint.tsx`), cinta con lo que incluyen los packs, pack Avanzada «Recomendado», comparativa (`PackCompare.tsx`), «Cómo trabajamos», preguntas frecuentes (componente «FAQ/Question» con variantes Open/Closed) y contacto oscuro como cierre. La versión de código (este repo y Cloudflare) **no tiene ese rediseño**: no la uses como referencia del diseño actual.
+
 En Framer, el plano de los packs es un componente de código (`PacksBlueprint.tsx`) con el mismo contenido que `src/components/Blueprint.tsx` y `src/components/Packs.tsx`. Si cambias los packs o los precios en un sitio, avisa de que el otro queda desactualizado.
 
 ## Comandos
@@ -74,7 +76,8 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 - Textos legales.
 - Avanzada: qué «otras ventajas» incluye además de reservas, pedidos y catálogo.
 - Clientia vende el add-on «Página web propia conectada» a +29 €/mes y dice que la web se diseña con Lintel; en Lintel las webs son de pago único. Falta decidir cómo se combinan y explicarlo igual en las dos webs.
-- Framer: decidir cuál de las dos versiones se queda (Framer o Cloudflare).
+- Framer: respuestas reales de dos preguntas frecuentes (dominio y hosting; plazo de entrega). Ahora dicen «[Respuesta pendiente]»: no publicar hasta rellenarlas.
+- Decidir si se retira la versión de Cloudflare, que ya no coincide con Framer.
 
 ## Cómo trabajar
 
