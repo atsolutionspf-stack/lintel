@@ -36,7 +36,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 | Qué | Archivo |
 | --- | --- |
 | Precios (una sola vez, valen para los dos idiomas) | `src/config/packs.ts` → `prices` |
-| Textos de los packs, mantenimiento y planes del TPV | `src/config/packs.ts` |
+| Textos de los packs y del mantenimiento | `src/config/packs.ts` |
 | Resto de textos, email, destino del formulario, bloque y enlace de Clientia (`clientia`, `clientiaUrl`) | `src/config/site.ts` |
 | Plano de la web (dibujo SVG que cambia según el pack) | `src/components/Blueprint.tsx` |
 | Selector de packs, ficha del pack y bloque de Clientia | `src/components/Packs.tsx` |
