@@ -8,6 +8,9 @@ import './styles/base.css';
 import './styles/sections.css';
 import App from './App';
 
+/** Versión publicada: sirve para comprobar qué despliegue está en vivo. */
+document.documentElement.dataset.version = '2026-11-09-redesign';
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
