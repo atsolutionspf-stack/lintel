@@ -712,58 +712,6 @@
   }
 }
 
-/* Bloque «¿Eres un restaurante?»: enlace a Clientia */
-.clientia {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: var(--space-lg) var(--space-2xl);
-  margin-top: var(--space-3xl);
-  padding: var(--space-xl);
-  border: 1.5px dashed var(--carmine);
-  background: var(--sheet);
-}
-.clientia__text {
-  flex: 1 1 28rem;
-  display: grid;
-  gap: var(--space-xs);
-}
-.clientia__text p:last-child {
-  color: var(--muted);
-  max-width: 40rem;
-}
-.clientia__kicker,
-.clientia__note {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  color: var(--carmine);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-.clientia__title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--fs-lg);
-  line-height: 1.2;
-}
-.clientia__action {
-  display: grid;
-  gap: var(--space-sm);
-  justify-items: start;
-}
-.clientia__note {
-  text-transform: none;
-  letter-spacing: 0;
-}
-
-@media (max-width: 680px) {
-  .clientia {
-    margin-top: var(--space-2xl);
-    padding: var(--space-lg);
-  }
-}
-
 /* ───────── Mantenimiento ───────── */
 
 .maintenance {
@@ -776,6 +724,44 @@
   gap: var(--space-2xl);
   align-items: start;
 }
+/* Columna de tarjetas: mantenimiento y Clientia */
+.maintenance__cards {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+/* «¿Eres un restaurante?»: enlace a Clientia */
+.clientia {
+  display: grid;
+  gap: var(--space-sm);
+  justify-items: start;
+  padding: var(--space-xl);
+  background: var(--sheet);
+  border: 1.5px dashed var(--carmine);
+}
+.clientia__kicker,
+.clientia__note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--carmine);
+}
+.clientia__kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.clientia__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-lg);
+  line-height: 1.2;
+}
+.clientia__text {
+  color: var(--muted);
+}
+.clientia__note {
+  margin-top: var(--space-xs);
+}
+
 .note-card {
   position: relative;
   display: grid;
@@ -916,6 +902,9 @@
   }
   .note-card {
     padding: var(--space-lg) var(--space-lg) var(--space-lg) calc(var(--space-lg) + 20px);
+  }
+  .clientia {
+    padding: var(--space-lg);
   }
 }
 

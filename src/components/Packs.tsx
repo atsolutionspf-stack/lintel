@@ -81,20 +81,6 @@ export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
             </button>
           </article>
         </div>
-
-        <aside className="clientia">
-          <div className="clientia__text">
-            <p className="clientia__kicker">{site.clientia.kicker}</p>
-            <h3 className="clientia__title">{site.clientia.title}</h3>
-            <p>{site.clientia.text}</p>
-          </div>
-          <div className="clientia__action">
-            <p className="clientia__note">{site.clientia.note}</p>
-            <a className="btn btn--ghost" href={site.clientiaUrl}>
-              {site.clientia.cta} →
-            </a>
-          </div>
-        </aside>
       </div>
     </section>
   );

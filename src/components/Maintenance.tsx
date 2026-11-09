@@ -15,19 +15,31 @@ export function Maintenance({ onRequest }: { onRequest: () => void }) {
           <p>{t.intro}</p>
         </header>
 
-        <article className="note-card">
-          <div className="note-card__head">
-            <h3>{maintenance.name}</h3>
-            <p className="note-card__price">
-              {formatMoney(maintenance.price)}
-              <span>{maintenance.unit}</span>
-            </p>
-          </div>
-          <p>{maintenance.description}</p>
-          <button type="button" className="btn btn--ghost" onClick={onRequest}>
-            {t.cta}
-          </button>
-        </article>
+        <div className="maintenance__cards">
+          <article className="note-card">
+            <div className="note-card__head">
+              <h3>{maintenance.name}</h3>
+              <p className="note-card__price">
+                {formatMoney(maintenance.price)}
+                <span>{maintenance.unit}</span>
+              </p>
+            </div>
+            <p>{maintenance.description}</p>
+            <button type="button" className="btn btn--ghost" onClick={onRequest}>
+              {t.cta}
+            </button>
+          </article>
+
+          <aside className="clientia">
+            <p className="clientia__kicker">{site.clientia.kicker}</p>
+            <h3 className="clientia__title">{site.clientia.title}</h3>
+            <p className="clientia__text">{site.clientia.text}</p>
+            <p className="clientia__note">{site.clientia.note}</p>
+            <a className="btn btn--ghost" href={site.clientiaUrl}>
+              {site.clientia.cta} →
+            </a>
+          </aside>
+        </div>
       </div>
     </section>
   );

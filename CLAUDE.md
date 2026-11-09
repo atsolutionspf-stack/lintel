@@ -6,7 +6,7 @@ Instrucciones para trabajar en este repositorio. Léelas antes de cambiar nada.
 
 **Lintel** es el estudio de AT Solutions que vende webs para **cualquier negocio** (no solo restaurantes). Esta es su web: una *one page* en español e inglés con cuatro packs (Simple, Avanzada, Profesional y Personalizada), la hora de mantenimiento y un formulario de contacto.
 
-- Lintel es una marca **separada** de **Clientia** (antes EasyHost), el software TPV y CRM. Clientia solo aparece en el bloque «¿Eres un restaurante?», debajo de los packs.
+- Lintel es una marca **separada** de **Clientia** (antes EasyHost), el software TPV y CRM. Clientia solo aparece en la tarjeta «¿Eres un restaurante?», en Servicios adicionales (no va dentro de ningún pack).
 - La web de Clientia es otro proyecto: repositorio `atsolutionspf-stack/EasyHost`, publicada en https://easyhost.atsolutionspf.workers.dev.
 
 ## Dónde vive la web
@@ -39,7 +39,8 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 | Textos de los packs y del mantenimiento | `src/config/packs.ts` |
 | Resto de textos, email, destino del formulario, bloque y enlace de Clientia (`clientia`, `clientiaUrl`) | `src/config/site.ts` |
 | Plano de la web (dibujo SVG que cambia según el pack) | `src/components/Blueprint.tsx` |
-| Selector de packs, ficha del pack y bloque de Clientia | `src/components/Packs.tsx` |
+| Selector de packs y ficha del pack | `src/components/Packs.tsx` |
+| Servicios adicionales: hora de mantenimiento y tarjeta de Clientia | `src/components/Maintenance.tsx` |
 | Envío del formulario (`mailto` o endpoint) | `src/lib/contact.ts` |
 | Colores, tipografía y espaciados | `src/styles/tokens.css` |
 | SEO y dominio | `index.html` (español) y `en/index.html` (inglés) |
