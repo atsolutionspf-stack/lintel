@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { formatMoney } from '../i18n';
-import { webPacks, type PackId } from '../config/packs';
+import { recommendedPack, webPacks, type PackId } from '../config/packs';
 import { site } from '../config/site';
 import { Blueprint, markerCount } from './Blueprint';
 import { SheetLabel } from './SheetLabel';
@@ -16,8 +16,8 @@ export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
   return (
     <section id="packs" className="section packs">
       <div className="container">
-        <SheetLabel n={2} />
-        <header className="section-head">
+        <header className="section-head" data-reveal>
+          <SheetLabel n={2} />
           <h2>{t.title}</h2>
           <p>{t.intro}</p>
         </header>
@@ -28,9 +28,15 @@ export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
           {webPacks.map((p, i) => (
             <label key={p.id} className="selector__cell">
               <input type="radio" name="pack" value={p.id} checked={p.id === selected} onChange={() => setSelected(p.id)} />
-              <span className="selector__num">{String(i + 1).padStart(2, '0')}</span>
+              <span className="selector__num">
+                {String(i + 1).padStart(2, '0')}
+                {p.id === recommendedPack && <span className="badge">{t.recommended}</span>}
+              </span>
               <span className="selector__name">{p.name}</span>
               <span className="selector__price">{p.price ? formatMoney(p.price) : t.customPrice}</span>
+              <span className="selector__delivery">
+                {t.deliveryLabel} {p.delivery}
+              </span>
             </label>
           ))}
           </div>
@@ -42,7 +48,10 @@ export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
           </div>
 
           <article className="spec" key={pack.id} aria-live="polite">
-            <p className="spec__num">Pack {String(index + 1).padStart(2, '0')}</p>
+            <p className="spec__num">
+              Pack {String(index + 1).padStart(2, '0')}
+              {pack.id === recommendedPack && <span className="badge">{t.recommended}</span>}
+            </p>
             <h3 className="spec__name">{pack.name}</h3>
 
             {pack.price ? (
@@ -51,10 +60,24 @@ export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
                 <span className="spec__terms">
                   {t.oneOff} · {t.noSub}
                 </span>
+                <span className="spec__delivery">
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <circle cx="8" cy="8" r="6.5" />
+                    <path d="M8 4.5V8l2.5 1.5" />
+                  </svg>
+                  {t.deliveryLabel}: {pack.delivery}
+                </span>
               </div>
             ) : (
               <div className="spec__price">
                 <span className="spec__amount spec__amount--text">{t.customPrice}</span>
+                <span className="spec__delivery">
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <circle cx="8" cy="8" r="6.5" />
+                    <path d="M8 4.5V8l2.5 1.5" />
+                  </svg>
+                  {t.deliveryLabel}: {pack.delivery}
+                </span>
               </div>
             )}
 

@@ -81,8 +81,8 @@ export function Contact({ pack, onPackChange }: { pack: string; onPackChange: (p
   return (
     <section id="contacto" className="section contact">
       <div className="container contact__grid">
-        <SheetLabel n={4} />
-        <header className="section-head">
+        <header className="section-head" data-reveal>
+          <SheetLabel n={7} />
           <h2>{t.title}</h2>
           <p>{t.intro}</p>
           <p className="contact__direct">
@@ -91,7 +91,7 @@ export function Contact({ pack, onPackChange }: { pack: string; onPackChange: (p
           </p>
         </header>
 
-        <form className="form" onSubmit={onSubmit} noValidate>
+        <form className="form" onSubmit={onSubmit} noValidate data-reveal>
           <div className="form__row">
             {input('name', t.name, 'text', 'name')}
             {input('business', t.business, 'text', 'organization')}

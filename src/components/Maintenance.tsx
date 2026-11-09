@@ -9,13 +9,13 @@ export function Maintenance({ onRequest }: { onRequest: () => void }) {
   return (
     <section id="mantenimiento" className="section maintenance">
       <div className="container maintenance__grid">
-        <SheetLabel n={3} />
-        <header className="section-head">
+        <header className="section-head" data-reveal>
+          <SheetLabel n={5} />
           <h2>{t.title}</h2>
           <p>{t.intro}</p>
         </header>
 
-        <div className="maintenance__cards">
+        <div className="maintenance__cards" data-reveal>
           <article className="note-card">
             <div className="note-card__head">
               <h3>{maintenance.name}</h3>

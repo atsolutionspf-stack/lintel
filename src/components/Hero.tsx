@@ -1,4 +1,5 @@
 import { site } from '../config/site';
+import { HeroBlueprint } from './HeroBlueprint';
 import { SheetLabel } from './SheetLabel';
 
 export function Hero() {
@@ -10,10 +11,12 @@ export function Hero() {
   return (
     <section id="inicio" className="hero">
       <div className="container">
-        <SheetLabel n={1} />
+        <div className="hero__top">
+          <p className="hero__kicker">{t.kicker}</p>
+          <SheetLabel n={1} />
+        </div>
         <div className="hero__grid">
-          <div className="hero__title-wrap">
-            <p className="hero__kicker">{t.kicker}</p>
+          <div className="hero__copy">
             <h1 className="hero__title">
               <span>{l1}</span>
               <span className="hero__indent">{l2}</span>
@@ -22,12 +25,6 @@ export function Hero() {
                 <span className="hero__circled">{circled}</span>
               </span>
             </h1>
-            <div className="hero__dim" aria-hidden="true">
-              <span>{t.dimension}</span>
-            </div>
-          </div>
-
-          <div className="hero__side">
             <p className="hero__lead">{t.lead}</p>
             <ol className="hero__notes">
               {t.notes.map((n) => (
@@ -38,11 +35,15 @@ export function Hero() {
               <a className="btn btn--primary" href="#packs">
                 {t.primary}
               </a>
-              <a className="btn btn--ghost" href="#contacto">
+              <a className="btn btn--outline-light" href="#contacto">
                 {t.secondary}
               </a>
             </div>
           </div>
+          <HeroBlueprint />
+        </div>
+        <div className="hero__dim" aria-hidden="true">
+          <span>{t.dimension}</span>
         </div>
       </div>
     </section>

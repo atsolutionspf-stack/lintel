@@ -18,7 +18,7 @@ Hay **dos versiones publicadas** con el mismo contenido. Antes de cambiar algo, 
 | Código (este repo) | Vite + React + TypeScript | https://lintel.atsolutionspf.workers.dev (Cloudflare Worker `lintel`) |
 | Framer | Proyecto «Lintel» en el workspace de Framer de GIO | https://early-galaxy-770441.framer.app |
 
-**Desde el 9/11/2026 la versión principal es Framer.** Ahí se hizo el rediseño: portada oscura con el plano animado (`HeroBlueprint.tsx`), cinta con lo que incluyen los packs, pack Avanzada «Recomendado», comparativa (`PackCompare.tsx`), «Cómo trabajamos», preguntas frecuentes (componente «FAQ/Question» con variantes Open/Closed) y contacto oscuro como cierre. La versión de código (este repo y Cloudflare) **no tiene ese rediseño**: no la uses como referencia del diseño actual.
+**Rediseño (9/11/2026):** portada oscura con el plano animado, cinta con lo que incluyen los packs, pack Avanzada «Recomendado» con plazos de entrega, comparativa, «Cómo trabajamos», preguntas frecuentes y contacto oscuro como cierre. **Las dos versiones (código y Framer) tienen el mismo diseño.** Si cambias una, avisa de que la otra queda desactualizada.
 
 En Framer, el plano de los packs es un componente de código (`PacksBlueprint.tsx`) con el mismo contenido que `src/components/Blueprint.tsx` y `src/components/Packs.tsx`. Si cambias los packs o los precios en un sitio, avisa de que el otro queda desactualizado.
 
@@ -41,7 +41,12 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 | Textos de los packs y del mantenimiento | `src/config/packs.ts` |
 | Resto de textos, email, destino del formulario, bloque y enlace de Clientia (`clientia`, `clientiaUrl`) | `src/config/site.ts` |
 | Plano de la web (dibujo SVG que cambia según el pack) | `src/components/Blueprint.tsx` |
+| Portada y su plano animado | `src/components/Hero.tsx`, `src/components/HeroBlueprint.tsx` |
+| Cinta (ticker) | `src/components/Ticker.tsx` (textos en `site.ticker`) |
 | Selector de packs y ficha del pack | `src/components/Packs.tsx` |
+| Comparativa (matriz de incluido / no incluido) | `src/components/Compare.tsx`, `compareMatrix` en `src/config/packs.ts` |
+| Cómo trabajamos | `src/components/Process.tsx` (textos en `site.process`) |
+| Preguntas frecuentes | `src/components/Faq.tsx` (textos en `site.faq`) |
 | Servicios adicionales: hora de mantenimiento y tarjeta de Clientia | `src/components/Maintenance.tsx` |
 | Envío del formulario (`mailto` o endpoint) | `src/lib/contact.ts` |
 | Colores, tipografía y espaciados | `src/styles/tokens.css` |
@@ -77,7 +82,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 - Textos legales.
 - Avanzada: qué «otras ventajas» incluye además de reservas, pedidos y catálogo.
 - Clientia vende el add-on «Página web propia conectada» a +29 €/mes y dice que la web se diseña con Lintel; en Lintel las webs son de pago único. Falta decidir cómo se combinan y explicarlo igual en las dos webs.
-- Decidir si se retira la versión de Cloudflare, que ya no coincide con Framer.
+- Decidir cuál de las dos versiones (Cloudflare o Framer) es la principal y retirar la otra.
 
 ## Cómo trabajar
 

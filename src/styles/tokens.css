@@ -20,7 +20,11 @@
   --blue: oklch(0.45 0.17 262);
   --blue-hover: oklch(0.39 0.16 262);
   --blue-soft: oklch(0.93 0.03 262);
-  --carmine: oklch(0.54 0.19 25); /* anotaciones, cotas y marcas */
+  --carmine: oklch(0.54 0.19 25); /* acción principal, anotaciones, cotas y marcas */
+  --carmine-dark: oklch(0.46 0.17 25);
+  --carmine-light: oklch(0.66 0.17 25); /* rojo sobre fondo oscuro */
+  --sky: oklch(0.76 0.11 268); /* azul claro sobre fondo oscuro */
+  --ink-surface: oklch(0.3 0.045 265); /* tarjetas sobre fondo oscuro */
 
   /* Líneas */
   --rule: oklch(0.89 0.014 262);
@@ -41,7 +45,7 @@
   --fs-md: 1.3125rem;
   --fs-lg: clamp(1.45rem, 1.25rem + 0.8vw, 1.75rem);
   --fs-xl: clamp(2rem, 1.45rem + 2.2vw, 2.85rem);
-  --fs-hero: clamp(2.75rem, 1.2rem + 6.4vw, 7rem);
+  --fs-hero: clamp(2.5rem, 1.5rem + 3.6vw, 4.25rem);
 
   /* Espaciado: escala de 4pt */
   --space-2xs: 0.25rem;

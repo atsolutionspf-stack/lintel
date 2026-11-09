@@ -21,8 +21,13 @@ export type WebPack = {
   price: string | null;
   description: string;
   features: string[];
+  /** Plazo de entrega (confirmado por AT Solutions). */
+  delivery: string;
   cta: string;
 };
+
+/** Pack destacado como «Recomendado» en el selector, la ficha y la comparativa. */
+export const recommendedPack: PackId = 'avanzada';
 
 export const webPacks: WebPack[] = pick({
   es: [
@@ -32,6 +37,7 @@ export const webPacks: WebPack[] = pick({
       price: prices.packSimple,
       description: 'Una web de una sola página (One Page) con la información de tu negocio.',
       features: ['Web One Page'],
+      delivery: 'hasta 48 h',
       cta: 'Solicitar información',
     },
     {
@@ -40,6 +46,7 @@ export const webPacks: WebPack[] = pick({
       price: prices.packAvanzada,
       description: 'Tu web con reservas y pedidos online, catálogo y una base de datos con tus clientes y pedidos.',
       features: ['Reservas y citas online', 'Pedidos y venta online', 'Catálogo digital', 'Base de datos'],
+      delivery: 'hasta 7 días',
       cta: 'Solicitar información',
     },
     {
@@ -48,6 +55,7 @@ export const webPacks: WebPack[] = pick({
       price: prices.packProfesional,
       description: 'Todo lo de Avanzada, más un panel de administración para gestionar tu negocio desde tu web.',
       features: ['Panel de administración', 'Gestión de pedidos, reservas y analíticas'],
+      delivery: 'hasta 12 días',
       cta: 'Solicitar información',
     },
     {
@@ -56,6 +64,7 @@ export const webPacks: WebPack[] = pick({
       price: null,
       description: 'Para proyectos con necesidades propias. Cuéntanos qué necesitas y te preparamos un presupuesto.',
       features: [],
+      delivery: 'según el proyecto',
       cta: 'Pedir presupuesto',
     },
   ],
@@ -66,6 +75,7 @@ export const webPacks: WebPack[] = pick({
       price: prices.packSimple,
       description: 'A single-page (one-page) website with your business’s information.',
       features: ['One-page website'],
+      delivery: 'up to 48 h',
       cta: 'Get information',
     },
     {
@@ -74,6 +84,7 @@ export const webPacks: WebPack[] = pick({
       price: prices.packAvanzada,
       description: 'Your website with online bookings and orders, a catalogue and a database of your customers and orders.',
       features: ['Online bookings and appointments', 'Online orders and sales', 'Digital catalogue', 'Database'],
+      delivery: 'up to 7 days',
       cta: 'Get information',
     },
     {
@@ -82,6 +93,7 @@ export const webPacks: WebPack[] = pick({
       price: prices.packProfesional,
       description: 'Everything in Advanced, plus an admin panel to run your business from your website.',
       features: ['Admin panel', 'Order, booking and analytics management'],
+      delivery: 'up to 12 days',
       cta: 'Get information',
     },
     {
@@ -90,6 +102,7 @@ export const webPacks: WebPack[] = pick({
       price: null,
       description: 'For projects with their own requirements. Tell us what you need and we’ll prepare a quote.',
       features: [],
+      delivery: 'depends on the project',
       cta: 'Request a quote',
     },
   ],
@@ -109,3 +122,14 @@ export const maintenance = pick({
     description: 'Changes to your website or catalogue, updates and tweaks. Booked by the hour, whenever you need it.',
   },
 });
+
+/** Comparativa: 1 = incluido, 0 = no incluido, 2 = a medida. Columnas: Simple, Avanzada, Profesional, Personalizada. */
+export const compareMatrix = [
+  [1, 1, 1, 2],
+  [0, 1, 1, 2],
+  [0, 1, 1, 2],
+  [0, 1, 1, 2],
+  [0, 1, 1, 2],
+  [0, 0, 1, 2],
+  [0, 0, 1, 2],
+];

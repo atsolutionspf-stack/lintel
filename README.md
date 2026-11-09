@@ -20,6 +20,8 @@ Español en `/` (`index.html`) e inglés en `/en/` (`en/index.html`). Los textos
 | Textos de los packs, mantenimiento y planes del TPV | `src/config/packs.ts` |
 | Resto de textos, email, destino del formulario, enlace a la web del TPV | `src/config/site.ts` |
 | Plano de la web (dibujo de los packs) | `src/components/Blueprint.tsx` |
+| Plano animado de la portada | `src/components/HeroBlueprint.tsx` |
+| Cinta, comparativa, «Cómo trabajamos» y preguntas frecuentes | `src/components/Ticker.tsx`, `Compare.tsx`, `Process.tsx`, `Faq.tsx` (textos en `src/config/site.ts`) |
 | Colores, tipografía y espaciados | `src/styles/tokens.css` |
 | SEO y dominio | `index.html` y `en/index.html` |
 | Páginas legales | `public/aviso-legal/`, `public/politica-de-*/`, `public/en/*/` |
