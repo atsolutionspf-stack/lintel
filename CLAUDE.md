@@ -56,6 +56,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 - **Todos los packs son de pago único, sin suscripción.**
 - **Sin «TPV» ni «CRM» en los packs.** La parte de datos se llama siempre **«Base de datos»** (en Avanzada y Profesional), porque los packs son para cualquier negocio. «TPV» y «CRM» solo aparecen al hablar de Clientia.
 - **Clientia:** «Planes desde 19 €/mes» debe coincidir con el plan más barato de la web de Clientia (ahora Essential).
+- **Datos confirmados por AT Solutions (9/11/2026):** dominio y hosting se contratan aparte (ayudamos a configurarlos); plazos de entrega: Simple hasta 48 h, Avanzada hasta 7 días, Profesional hasta 12 días. Están en las preguntas frecuentes de Framer.
 - **Sin datos inventados:** nada de testimonios, cifras de clientes, ejemplos de webs hechas, teléfonos ni emails falsos. Lo que falte va como placeholder entre corchetes (`[Teléfono de contacto]`) o con dominio `.example`.
 - **Textos generales**, para cualquier negocio: «tu negocio», «catálogo», «reservas y citas». No vuelvas a hablar solo de restaurantes.
 - **Diseño «el plano»:** la página es una lámina técnica (papel cuadriculado, líneas en azul tinta, anotaciones y cotas en rojo carmín, rótulos «Lámina 0X / 04», pie con forma de cajetín). Tipografías: Young Serif (titulares), Schibsted Grotesk (texto) y JetBrains Mono (anotaciones). Usa los tokens de `src/styles/tokens.css`; no añadas colores sueltos.
@@ -76,7 +77,6 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 - Textos legales.
 - Avanzada: qué «otras ventajas» incluye además de reservas, pedidos y catálogo.
 - Clientia vende el add-on «Página web propia conectada» a +29 €/mes y dice que la web se diseña con Lintel; en Lintel las webs son de pago único. Falta decidir cómo se combinan y explicarlo igual en las dos webs.
-- Framer: respuestas reales de dos preguntas frecuentes (dominio y hosting; plazo de entrega). Ahora dicen «[Respuesta pendiente]»: no publicar hasta rellenarlas.
 - Decidir si se retira la versión de Cloudflare, que ya no coincide con Framer.
 
 ## Cómo trabajar
