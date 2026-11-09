@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { formatMoney } from '../i18n';
-import { prices, tpvPlans, webPacks, type PackId } from '../config/packs';
+import { webPacks, type PackId } from '../config/packs';
 import { site } from '../config/site';
 import { Blueprint, markerCount } from './Blueprint';
 import { SheetLabel } from './SheetLabel';
@@ -31,7 +31,6 @@ export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
               <span className="selector__num">{String(i + 1).padStart(2, '0')}</span>
               <span className="selector__name">{p.name}</span>
               <span className="selector__price">{p.price ? formatMoney(p.price) : t.customPrice}</span>
-              {p.includesTpv && <span className="selector__tag">+ TPV</span>}
             </label>
           ))}
           </div>
@@ -50,7 +49,7 @@ export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
               <div className="spec__price">
                 <span className="spec__amount">{formatMoney(pack.price)}</span>
                 <span className="spec__terms">
-                  {t.oneOff} · {pack.includesTpv ? t.plusTpv(prices.tpvFrom) : t.noSub}
+                  {t.oneOff} · {t.noSub}
                 </span>
               </div>
             ) : (
@@ -77,36 +76,25 @@ export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
               </>
             )}
 
-            {pack.includesTpv && (
-              <div className="spec__tpv">
-                <h4 className="spec__label">{t.tpvPlansTitle}</h4>
-                <dl>
-                  {tpvPlans.map((plan) => (
-                    <div key={plan.name}>
-                      <dt>
-                        {plan.name}
-                        <span>
-                          {formatMoney(plan.price)}
-                          {t.perMonth}
-                        </span>
-                      </dt>
-                      <dd>{plan.includes}</dd>
-                    </div>
-                  ))}
-                </dl>
-                {site.tpvUrl && (
-                  <a className="link" href={site.tpvUrl}>
-                    {t.tpvLink} →
-                  </a>
-                )}
-              </div>
-            )}
-
             <button type="button" className="btn btn--primary spec__cta" onClick={() => onRequest(pack.id)}>
               {pack.cta}
             </button>
           </article>
         </div>
+
+        <aside className="clientia">
+          <div className="clientia__text">
+            <p className="clientia__kicker">{site.clientia.kicker}</p>
+            <h3 className="clientia__title">{site.clientia.title}</h3>
+            <p>{site.clientia.text}</p>
+          </div>
+          <div className="clientia__action">
+            <p className="clientia__note">{site.clientia.note}</p>
+            <a className="btn btn--ghost" href={site.clientiaUrl}>
+              {site.clientia.cta} →
+            </a>
+          </div>
+        </aside>
       </div>
     </section>
   );

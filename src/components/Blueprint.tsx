@@ -3,7 +3,7 @@ import { site } from '../config/site';
 
 /**
  * Plano de la web de un negocio. Cada pack enciende sus capas:
- * Simple (One Page) → Avanzada (+ reservas, pedidos, catálogo) → Profesional (+ TPV y CRM conectados).
+ * Simple (One Page) → Avanzada (+ reservas, pedidos, catálogo y base de datos) → Profesional (+ panel de administración).
  * Las marcas rojas numeradas corresponden a la lista de "Incluye" del pack.
  */
 const LEVEL: Record<PackId, number> = { simple: 1, avanzada: 2, profesional: 3, personalizada: 0 };
@@ -11,8 +11,8 @@ const LEVEL: Record<PackId, number> = { simple: 1, avanzada: 2, profesional: 3, 
 /** Posición de las marcas numeradas de cada pack, en el orden de su lista de funcionalidades. */
 const MARKERS: Record<PackId, [number, number][]> = {
   simple: [[286, 132]],
-  avanzada: [[60, 206], [440, 82], [60, 312]],
-  profesional: [[540, 236], [16, 356]],
+  avanzada: [[60, 206], [440, 82], [60, 312], [540, 236]],
+  profesional: [[16, 318], [16, 365]],
   personalizada: [],
 };
 
@@ -94,36 +94,43 @@ export function Blueprint({ pack, label }: { pack: PackId; label: string }) {
             <path d="M240 0h28" className="bp-line" />
           </g>
         ))}
-      </g>
 
-      {/* Profesional: TPV y CRM conectados */}
-      <g className={on(3)}>
-        <path d="M296 228C420 228 470 290 540 290" className="bp-link" />
-        <path d="M496 102C520 160 520 250 560 250" className="bp-link" />
-        <path d="M120 250C120 300 70 330 70 356" className="bp-link" />
-
-        <path
-          d="M540 236h160v196l-10 8-10-8-10 8-10-8-10 8-10-8-10 8-10-8-10 8-10-8-10 8-10-8-10 8-10-8-10 8-10-8-10 8z"
-          className="bp-sheet bp-line bp-shadow"
-        />
-        <text x="556" y="260" className="bp-serif bp-serif--sm">{p.tpv}</text>
-        <text x="556" y="278" className="bp-mono bp-mono--xs">{p.tickets}</text>
-        <path d="M556 288h128" className="bp-leader" />
-        {[0, 1, 2, 3].map((i) => (
-          <g key={i} transform={`translate(556 ${306 + i * 20})`}>
-            <path d={`M0 0h${60 + (i % 3) * 14}`} className="bp-line" />
-            <path d="M104 0h24" className="bp-line" />
+        {/* Base de datos: recibe las reservas y los pedidos de la web */}
+        <path d="M296 228C420 228 470 300 540 300" className="bp-link" />
+        <path d="M496 102C540 140 600 180 610 236" className="bp-link" />
+        <rect x="540" y="236" width="160" height="196" rx="6" className="bp-sheet bp-line bp-shadow" />
+        <text x="556" y="262" className="bp-serif bp-serif--sm">{p.database}</text>
+        <g className="bp-line">
+          <ellipse cx="682" cy="252" rx="9" ry="3.5" />
+          <path d="M673 252v12c0 2 4 3.5 9 3.5s9-1.5 9-3.5v-12M673 258c0 2 4 3.5 9 3.5s9-1.5 9-3.5" />
+        </g>
+        <text x="556" y="282" className="bp-mono bp-mono--xs">{p.records}</text>
+        <path d="M556 292h128" className="bp-leader" />
+        {[0, 1, 2, 3, 4].map((i) => (
+          <g key={i} transform={`translate(556 ${312 + i * 22})`}>
+            <path d={`M0 0h${36 + (i % 3) * 8}`} className="bp-line" />
+            <path d={`M52 0h${30 + ((i + 1) % 3) * 6}`} className="bp-line bp-line--thin" />
+            <path d="M108 0h20" className="bp-line" />
+            <path d="M0 11h128" className="bp-line bp-line--thin" />
           </g>
         ))}
-        <rect x="556" y="390" width="128" height="22" rx="3" className="bp-ink" />
+      </g>
 
-        <rect x="16" y="356" width="160" height="96" rx="6" className="bp-sheet bp-line bp-shadow" />
-        <text x="32" y="378" className="bp-serif bp-serif--sm">{p.crm}</text>
-        {[0, 1, 2].map((i) => (
-          <g key={i} transform={`translate(32 ${394 + i * 18})`}>
-            <circle cx="5" cy="0" r="5" className="bp-soft bp-line" />
-            <path d={`M16 0h${80 - i * 14}`} className="bp-line" />
+      {/* Profesional: panel de administración con pedidos, reservas y analíticas */}
+      <g className={on(3)}>
+        <path d="M540 410C430 436 320 420 222 400" className="bp-link" />
+        <rect x="16" y="318" width="206" height="134" rx="6" className="bp-sheet bp-line bp-shadow" />
+        <text x="32" y="340" className="bp-serif bp-serif--sm">{p.panel}</text>
+        {p.stats.map((t, i) => (
+          <g key={t} transform={`translate(${32 + i * 60} 350)`}>
+            <rect width="54" height="30" rx="3" className="bp-soft" />
+            <text x="5" y="11" className="bp-mono bp-mono--xs">{t}</text>
+            <rect x="5" y="17" width={22 + i * 8} height="6" rx="1" className="bp-ink" />
           </g>
+        ))}
+        <path d="M32 440h174" className="bp-line bp-line--thin" />
+        {[18, 26, 14, 32, 24, 38, 30, 44].map((h, i) => (
+          <rect key={i} x={36 + i * 21} y={440 - h} width="13" height={h} className={i === 7 ? 'bp-accent' : 'bp-ink'} />
         ))}
       </g>
 

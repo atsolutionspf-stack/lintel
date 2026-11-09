@@ -15,16 +15,16 @@ const shared = {
    */
   formEndpoint: null as string | null,
   /**
-   * Web del TPV EasyHost, para el enlace del pack Profesional (cada idioma enlaza a su versión).
-   * `null` = no se muestra el enlace. Sustituye por el dominio definitivo cuando lo haya.
+   * Web de Clientia (TPV y CRM), para el bloque «¿Eres un restaurante?» (cada idioma enlaza a su versión).
+   * Sustituye por el dominio definitivo cuando lo haya.
    */
-  tpvUrl: 'https://easyhost.atsolutionspf.workers.dev' as string | null,
+  clientiaUrl: 'https://easyhost.atsolutionspf.workers.dev',
 };
 
 export const site = pick({
   es: {
     ...shared,
-    tpvUrl: shared.tpvUrl && `${shared.tpvUrl}/`,
+    clientiaUrl: `${shared.clientiaUrl}/`,
     phone: '[Teléfono de contacto]',
     nav: [
       { label: 'Packs', href: '#packs' },
@@ -37,25 +37,20 @@ export const site = pick({
     hero: {
       kicker: 'Estudio de diseño web',
       title: ['Tu negocio,', 'también abierto', 'en internet.'],
-      lead: 'Diseñamos la web de tu negocio: desde una página con tu información hasta reservas, pedidos online y el TPV EasyHost conectado.',
-      notes: ['pago único', 'sin suscripción en Simple y Avanzada', 'desde 390 €'],
+      lead: 'Diseñamos la web de tu negocio: desde una página con tu información hasta reservas, pedidos online y tu propio panel de administración.',
+      notes: ['pago único', 'sin suscripción', 'desde 390 €'],
       primary: 'Ver los packs',
       secondary: 'Pedir presupuesto',
       dimension: '4 packs · una sola web',
     },
     packs: {
       title: 'Creación de tu web',
-      intro:
-        'Simple y Avanzada se pagan una sola vez, sin suscripción. El pack Profesional incluye el TPV: pago único más la suscripción mensual del TPV.',
+      intro: 'Todos los packs se pagan una sola vez, sin suscripción.',
       hint: 'Elige un pack y mira cómo cambia el plano de tu web.',
       oneOff: 'pago único',
       noSub: 'Sin suscripción',
-      plusTpv: (from: string) => `+ suscripción del TPV desde ${from} €/mes`,
       customPrice: 'Precio a medida',
       includes: 'Incluye',
-      tpvPlansTitle: 'Planes del TPV',
-      tpvLink: 'Ver la web del TPV',
-      perMonth: '/mes',
     },
     preview: {
       url: 'tu-negocio.es',
@@ -70,11 +65,19 @@ export const site = pick({
       date: 'Fecha',
       people: 'Servicio',
       time: 'Hora',
-      tpv: 'TPV EasyHost',
-      crm: 'CRM',
-      tickets: 'Venta 0042 · Ticket',
+      database: 'Base de datos',
+      records: 'Clientes y pedidos',
+      panel: 'Panel de administración',
+      stats: ['Pedidos', 'Reservas', 'Analíticas'],
       custom: 'Tu proyecto',
       customNote: 'lo dibujamos contigo',
+    },
+    clientia: {
+      kicker: 'Para hostelería',
+      title: '¿Eres un restaurante?',
+      text: 'Conecta tu web con Clientia, el software TPV y CRM: las reservas y los pedidos de tu web llegan directamente a Clientia.',
+      note: 'Planes desde 19 €/mes',
+      cta: 'Conocer Clientia',
     },
     maintenance: {
       title: 'Servicios adicionales',
@@ -118,7 +121,7 @@ export const site = pick({
   },
   en: {
     ...shared,
-    tpvUrl: shared.tpvUrl && `${shared.tpvUrl}/en/`,
+    clientiaUrl: `${shared.clientiaUrl}/en/`,
     phone: '[Contact phone]',
     nav: [
       { label: 'Packs', href: '#packs' },
@@ -131,25 +134,20 @@ export const site = pick({
     hero: {
       kicker: 'Web design studio',
       title: ['Your business,', 'open online', 'as well.'],
-      lead: 'We design your business’s website: from a single page with your information to online bookings, online orders and the EasyHost POS connected.',
-      notes: ['one-off payment', 'no subscription on Simple and Advanced', 'from €390'],
+      lead: 'We design your business’s website: from a single page with your information to online bookings, online orders and your own admin panel.',
+      notes: ['one-off payment', 'no subscription', 'from €390'],
       primary: 'See the packs',
       secondary: 'Request a quote',
       dimension: '4 packs · one website',
     },
     packs: {
       title: 'Your website',
-      intro:
-        'Simple and Advanced are a one-off payment, with no subscription. The Professional pack includes the POS: a one-off payment plus the monthly POS subscription.',
+      intro: 'Every pack is a one-off payment, with no subscription.',
       hint: 'Pick a pack and watch your website’s blueprint change.',
       oneOff: 'one-off payment',
       noSub: 'No subscription',
-      plusTpv: (from: string) => `+ POS subscription from €${from}/month`,
       customPrice: 'Tailored pricing',
       includes: 'Includes',
-      tpvPlansTitle: 'POS plans',
-      tpvLink: 'Visit the POS website',
-      perMonth: '/month',
     },
     preview: {
       url: 'your-business.com',
@@ -164,11 +162,19 @@ export const site = pick({
       date: 'Date',
       people: 'Service',
       time: 'Time',
-      tpv: 'EasyHost POS',
-      crm: 'CRM',
-      tickets: 'Sale 0042 · Receipt',
+      database: 'Database',
+      records: 'Customers & orders',
+      panel: 'Admin panel',
+      stats: ['Orders', 'Bookings', 'Analytics'],
       custom: 'Your project',
       customNote: 'we draw it with you',
+    },
+    clientia: {
+      kicker: 'For hospitality',
+      title: 'Are you a restaurant?',
+      text: 'Connect your website to Clientia, the POS and CRM software: bookings and orders from your website go straight into Clientia.',
+      note: 'Plans from €19/month',
+      cta: 'Discover Clientia',
     },
     maintenance: {
       title: 'Extra services',
