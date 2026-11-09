@@ -7,8 +7,8 @@ import { pick } from '../i18n';
 /* Datos comunes a los dos idiomas */
 const shared = {
   name: 'Lintel',
-  /** Email que recibe las solicitudes. Pendiente: dato real. */
-  email: 'hola@lintel.example',
+  /** Email que recibe las solicitudes. */
+  email: 'atsolutionspf@gmail.com',
   /**
    * URL a la que el formulario enviará los datos en JSON (POST): Formspree, un webhook, etc.
    * Si es `null`, el formulario abre el correo del visitante con la solicitud ya redactada.
@@ -74,9 +74,9 @@ export const site = pick({
     },
     clientia: {
       kicker: 'Para hostelería',
-      title: '¿Eres un restaurante?',
-      text: 'Conecta tu web con Clientia, el software TPV y CRM: las reservas y los pedidos de tu web llegan directamente a Clientia.',
-      note: 'Planes desde 19 €/mes',
+      title: '¿Tienes un restaurante, bar o cafetería?',
+      text: 'Conecta tu web con Clientia, el software TPV y CRM: las reservas y los pedidos de tu web llegan directamente a tu sistema.',
+      note: 'Planes desde 19 €/mes · la conexión con tu web es un add-on de Clientia',
       cta: 'Conocer Clientia',
     },
     maintenance: {
@@ -171,9 +171,9 @@ export const site = pick({
     },
     clientia: {
       kicker: 'For hospitality',
-      title: 'Are you a restaurant?',
-      text: 'Connect your website to Clientia, the POS and CRM software: bookings and orders from your website go straight into Clientia.',
-      note: 'Plans from €19/month',
+      title: 'Do you run a restaurant, bar or café?',
+      text: 'Connect your website to Clientia, the POS and CRM software: bookings and orders from your website go straight into your system.',
+      note: 'Plans from €19/month · connecting your website is a Clientia add-on',
       cta: 'Discover Clientia',
     },
     maintenance: {

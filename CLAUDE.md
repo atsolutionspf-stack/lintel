@@ -69,12 +69,12 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 
 ## Pendiente
 
-- Email y teléfono reales (`src/config/site.ts`); ahora el email es `hola@lintel.example`.
+- Teléfono real (`src/config/site.ts`). El email de contacto es `atsolutionspf@gmail.com`.
 - Dominio definitivo (libres a 5/11/2026: `lintelstudio.com`, `lintelwebs.com`) en `index.html` y `en/index.html`.
 - Textos legales.
 - Avanzada: qué «otras ventajas» incluye además de reservas, pedidos y catálogo.
 - Clientia vende el add-on «Página web propia conectada» a +29 €/mes y dice que la web se diseña con Lintel; en Lintel las webs son de pago único. Falta decidir cómo se combinan y explicarlo igual en las dos webs.
-- Framer: poner el email de destino del formulario y decidir cuál de las dos versiones se queda.
+- Framer: decidir cuál de las dos versiones se queda (Framer o Cloudflare).
 
 ## Cómo trabajar
 
