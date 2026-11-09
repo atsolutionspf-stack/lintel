@@ -74,7 +74,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 - Textos legales.
 - Avanzada: qué «otras ventajas» incluye además de reservas, pedidos y catálogo.
 - Clientia vende el add-on «Página web propia conectada» a +29 €/mes y dice que la web se diseña con Lintel; en Lintel las webs son de pago único. Falta decidir cómo se combinan y explicarlo igual en las dos webs.
-- Framer: publicar los cambios de los packs y el bloque de Clientia (hechos el 9/11/2026, sin publicar), poner el email de destino del formulario y decidir cuál de las dos versiones se queda.
+- Framer: poner el email de destino del formulario y decidir cuál de las dos versiones se queda.
 
 ## Cómo trabajar
 
