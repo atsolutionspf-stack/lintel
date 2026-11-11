@@ -78,7 +78,7 @@ export const site = pick({
     },
     compare: {
       title: 'Compara los packs',
-      intro: 'Todo lo que incluye cada pack, de un vistazo. Avanzada es el que recomendamos para la mayoría de negocios: recibes reservas y pedidos y guardas tus clientes.',
+      intro: 'Todo lo que incluye cada pack, de un vistazo. Avanzada es el que recomendamos para la mayoría de negocios: recibes reservas y pedidos online.',
       feature: 'Qué incluye',
       rows: ['Web con la información de tu negocio', 'Reservas y citas online', 'Pedidos y venta online', 'Catálogo digital', 'Base de datos de clientes y pedidos', 'Panel de administración', 'Gestión de pedidos, reservas y analíticas'],
       deliveryRow: 'Plazo de entrega',
@@ -107,7 +107,7 @@ export const site = pick({
       cta: 'Hacer una pregunta',
       items: [
         ['¿Hay cuotas mensuales?', 'No. Todos los packs se pagan una sola vez, sin suscripción. Si más adelante necesitas cambios, puedes contratar horas de mantenimiento a 30 €/hora.'],
-        ['¿Qué pack me conviene?', 'Simple, si solo necesitas que tu negocio esté en internet con su información. Avanzada, si quieres recibir reservas, citas o pedidos online y guardar tus clientes. Profesional, si además quieres gestionarlo todo desde un panel de administración. Si no lo tienes claro, escríbenos y te ayudamos a elegir.'],
+        ['¿Qué pack me conviene?', 'Simple, si solo necesitas que tu negocio esté en internet con su información. Avanzada, si quieres recibir reservas, citas o pedidos online. Profesional, si además quieres guardar tus clientes y pedidos en una base de datos y gestionarlo todo desde un panel de administración. Si no lo tienes claro, escríbenos y te ayudamos a elegir.'],
         ['¿Puedo hacer cambios en mi web después?', 'Sí. Los cambios, actualizaciones y ajustes se contratan por horas, a 30 €/hora, cuando los necesites.'],
         ['¿El dominio y el hosting están incluidos?', 'No, el dominio y el hosting se contratan aparte. Te ayudamos a configurarlos.'],
         ['¿Cuánto se tarda en tener la web lista?', 'Simple: hasta 48 horas. Avanzada: hasta 7 días. Profesional: hasta 12 días.'],
@@ -217,7 +217,7 @@ export const site = pick({
     },
     compare: {
       title: 'Compare the packs',
-      intro: 'Everything each pack includes, at a glance. Advanced is the one we recommend for most businesses: you take bookings and orders and keep your customer records.',
+      intro: 'Everything each pack includes, at a glance. Advanced is the one we recommend for most businesses: you take bookings and orders online.',
       feature: 'What’s included',
       rows: ['Website with your business information', 'Online bookings and appointments', 'Online orders and sales', 'Digital catalogue', 'Customer and order database', 'Admin panel', 'Order, booking and analytics management'],
       deliveryRow: 'Delivery time',
@@ -246,7 +246,7 @@ export const site = pick({
       cta: 'Ask a question',
       items: [
         ['Are there monthly fees?', 'No. Every pack is a one-off payment, with no subscription. If you need changes later, you can book maintenance hours at €30/hour.'],
-        ['Which pack is right for me?', 'Simple, if you just need your business online with its information. Advanced, if you want to take bookings, appointments or orders online and keep your customer records. Professional, if you also want to manage everything from an admin panel. If you’re not sure, write to us and we’ll help you choose.'],
+        ['Which pack is right for me?', 'Simple, if you just need your business online with its information. Advanced, if you want to take bookings, appointments or orders online. Professional, if you also want to keep your customers and orders in a database and manage everything from an admin panel. If you’re not sure, write to us and we’ll help you choose.'],
         ['Can I make changes to my website later?', 'Yes. Changes, updates and tweaks are booked by the hour, at €30/hour, whenever you need them.'],
         ['Are the domain and hosting included?', 'No, the domain and hosting are purchased separately. We help you set them up.'],
         ['How long does it take to get the website ready?', 'Simple: up to 48 hours. Advanced: up to 7 days. Professional: up to 12 days.'],

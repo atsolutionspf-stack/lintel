@@ -3,7 +3,7 @@ import { site } from '../config/site';
 
 /**
  * Plano de la web de un negocio. Cada pack enciende sus capas:
- * Simple (One Page) → Avanzada (+ reservas, pedidos, catálogo y base de datos) → Profesional (+ panel de administración).
+ * Simple (One Page) → Avanzada (+ reservas, pedidos y catálogo) → Profesional (+ base de datos y panel de administración).
  * Las marcas rojas numeradas corresponden a la lista de "Incluye" del pack.
  */
 const LEVEL: Record<PackId, number> = { simple: 1, avanzada: 2, profesional: 3, personalizada: 0 };
@@ -11,8 +11,8 @@ const LEVEL: Record<PackId, number> = { simple: 1, avanzada: 2, profesional: 3, 
 /** Posición de las marcas numeradas de cada pack, en el orden de su lista de funcionalidades. */
 const MARKERS: Record<PackId, [number, number][]> = {
   simple: [[286, 132]],
-  avanzada: [[60, 206], [440, 82], [60, 312], [540, 236]],
-  profesional: [[16, 318], [16, 365]],
+  avanzada: [[60, 206], [440, 82], [60, 312]],
+  profesional: [[540, 236], [16, 318], [16, 365]],
   personalizada: [],
 };
 
@@ -94,7 +94,10 @@ export function Blueprint({ pack, label }: { pack: PackId; label: string }) {
             <path d="M240 0h28" className="bp-line" />
           </g>
         ))}
+      </g>
 
+      {/* Profesional: base de datos y panel de administración con pedidos, reservas y analíticas */}
+      <g className={on(3)}>
         {/* Base de datos: recibe las reservas y los pedidos de la web */}
         <path d="M296 228C420 228 470 300 540 300" className="bp-link" />
         <path d="M496 102C540 140 600 180 610 236" className="bp-link" />
@@ -114,10 +117,6 @@ export function Blueprint({ pack, label }: { pack: PackId; label: string }) {
             <path d="M0 11h128" className="bp-line bp-line--thin" />
           </g>
         ))}
-      </g>
-
-      {/* Profesional: panel de administración con pedidos, reservas y analíticas */}
-      <g className={on(3)}>
         <path d="M540 410C430 436 320 420 222 400" className="bp-link" />
         <rect x="16" y="318" width="206" height="134" rx="6" className="bp-sheet bp-line bp-shadow" />
         <text x="32" y="340" className="bp-serif bp-serif--sm">{p.panel}</text>

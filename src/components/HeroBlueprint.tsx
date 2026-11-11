@@ -69,6 +69,9 @@ export function HeroBlueprint() {
                 <path d={`M246 ${316 + i * 14}h36`} className="hb-line" />
               </g>
             ))}
+          </g>
+
+          <g className={on(2)}>
             <path className="hb-flow hb-red" d="M248 216C340 226 380 250 420 262" />
             <path className="hb-flow hb-red" d="M400 98C430 140 470 190 480 236" />
             <rect x="410" y="236" width="140" height="130" rx="6" className="hb-card" />
@@ -84,9 +87,6 @@ export function HeroBlueprint() {
             <circle r="3.5" className="hb-dot">
               <animateMotion dur="2.2s" repeatCount="indefinite" path="M248 216C340 226 380 250 420 262" />
             </circle>
-          </g>
-
-          <g className={on(2)}>
             <path className="hb-flow hb-skyline" d="M410 340C330 372 230 372 176 360" />
             <rect x="10" y="250" width="166" height="122" rx="6" className="hb-card" />
             <text x="24" y="272" className="hb-serif hb-serif--sm">{p.panel}</text>

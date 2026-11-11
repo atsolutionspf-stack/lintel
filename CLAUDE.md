@@ -59,7 +59,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 - **Dos idiomas siempre a la par.** Español en `/`, inglés en `/en/`. Cada texto está en los bloques `es` y `en` de `src/config`; si cambias uno, cambia el otro.
 - **Precios en un solo sitio:** `prices` en `src/config/packs.ts`. No los escribas a mano en los textos.
 - **Todos los packs son de pago único, sin suscripción.**
-- **Sin «TPV» ni «CRM» en los packs.** La parte de datos se llama siempre **«Base de datos»** (en Avanzada y Profesional), porque los packs son para cualquier negocio. «TPV» y «CRM» solo aparecen al hablar de Clientia.
+- **Sin «TPV» ni «CRM» en los packs.** La parte de datos se llama siempre **«Base de datos»** (solo en Profesional), porque los packs son para cualquier negocio. «TPV» y «CRM» solo aparecen al hablar de Clientia.
 - **Clientia:** «Planes desde 19 €/mes» debe coincidir con el plan más barato de la web de Clientia (ahora Essential).
 - **Datos confirmados por AT Solutions (9/11/2026):** dominio y hosting se contratan aparte (ayudamos a configurarlos); plazos de entrega: Simple hasta 48 h, Avanzada hasta 7 días, Profesional hasta 12 días. Están en las preguntas frecuentes de Framer.
 - **Sin datos inventados:** nada de testimonios, cifras de clientes, ejemplos de webs hechas, teléfonos ni emails falsos. Lo que falte va como placeholder entre corchetes (`[Teléfono de contacto]`) o con dominio `.example`.
