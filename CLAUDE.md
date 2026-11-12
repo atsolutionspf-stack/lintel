@@ -48,7 +48,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 | Cómo trabajamos | `src/components/Process.tsx` (textos en `site.process`) |
 | Preguntas frecuentes | `src/components/Faq.tsx` (textos en `site.faq`) |
 | Servicios adicionales: hora de mantenimiento y tarjeta de Clientia | `src/components/Maintenance.tsx` |
-| Envío del formulario (`mailto` o endpoint) | `src/lib/contact.ts` |
+| Envío del formulario (FormSubmit → correo a lintelwebs@gmail.com) | `src/lib/contact.ts`, `formEndpoint` en `src/config/site.ts` |
 | Colores, tipografía y espaciados | `src/styles/tokens.css` |
 | SEO y dominio | `index.html` (español) y `en/index.html` (inglés) |
 | Páginas legales | `public/aviso-legal/`, `public/politica-de-*/`, `public/en/*/` |
@@ -77,7 +77,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 
 ## Pendiente
 
-- Teléfono real (`src/config/site.ts`). El email de contacto es `atsolutionspf@gmail.com`.
+- Teléfono real (`src/config/site.ts`). El email de contacto es `lintelwebs@gmail.com`.
 - Dominio definitivo (libres a 5/11/2026: `lintelstudio.com`, `lintelwebs.com`) en `index.html` y `en/index.html`.
 - Textos legales.
 - Avanzada: qué «otras ventajas» incluye además de reservas, pedidos y catálogo.
