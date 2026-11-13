@@ -64,8 +64,8 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 - **Datos confirmados por AT Solutions (9/11/2026):** dominio y hosting se contratan aparte (ayudamos a configurarlos); plazos de entrega: Simple hasta 48 h, Avanzada hasta 7 días, Profesional hasta 12 días. Están en las preguntas frecuentes de Framer.
 - **Sin datos inventados:** nada de testimonios, cifras de clientes, ejemplos de webs hechas, teléfonos ni emails falsos. Lo que falte va como placeholder entre corchetes (`[Teléfono de contacto]`) o con dominio `.example`.
 - **Textos generales**, para cualquier negocio: «tu negocio», «catálogo», «reservas y citas». No vuelvas a hablar solo de restaurantes.
-- **Diseño «el plano»:** la página es una lámina técnica (papel cuadriculado, líneas en azul tinta, anotaciones y cotas en rojo carmín, rótulos «Lámina 0X / 04», pie con forma de cajetín). Tipografías: Young Serif (titulares), Schibsted Grotesk (texto) y JetBrains Mono (anotaciones). Usa los tokens de `src/styles/tokens.css`; no añadas colores sueltos.
-- **Logotipo:** un dintel (dos pilares y una viga roja) sobre un cuadrado azul. Está en `src/components/Nav.tsx` y `public/favicon.svg`.
+- **Marca «Escuadra» (manual de marca v2.0, 13/11/2026):** paleta cobalto `#2340C8` (principal, confianza) · hormigón `#E7E8E4` (apoyo, orden) · ámbar `#FFB547` (acción: botones con texto en tinta `#12141C`), proporción 60 · 30 · 10. Tipografías: Unbounded (logo y titulares), Manrope (texto), IBM Plex Mono (datos y cotas). El ámbar no se usa como texto sobre claro: para eso está `#8A5700`. Usa siempre los tokens de `src/styles/tokens.css`.
+- **Logotipo:** el símbolo «Escuadra» (viga + jamba en cobalto y un cuadrado de luz en ámbar) y el nombre siempre en minúscula, «lintel», en Unbounded. Está en `src/components/Nav.tsx` y `public/favicon.svg`. Manual de marca: https://claude.ai/artifact/GKUCsupiQc4JHcnH52Eq7i
 - **Responsive:** la web debe verse bien de 375 px a 1440 px, sin scroll horizontal. Compruébalo en el navegador después de cambios visuales.
 - **Accesibilidad:** etiquetas visibles en el formulario, foco visible, y `prefers-reduced-motion` respetado.
 

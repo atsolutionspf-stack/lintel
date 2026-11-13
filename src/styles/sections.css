@@ -15,31 +15,29 @@
   white-space: nowrap;
   cursor: pointer;
   /* Sombra dibujada: el botón parece una pieza recortada sobre el plano */
-  box-shadow: 3px 3px 0 var(--ink);
   transition:
     transform 160ms var(--ease-out),
     box-shadow 160ms var(--ease-out),
     background-color 160ms var(--ease-out);
 }
 .btn:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 var(--ink);
+  transform: translateY(-1px);
 }
 .btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--ink);
+  transform: translateY(1px);
 }
 .btn:disabled {
   opacity: 0.6;
   cursor: progress;
 }
 .btn--primary {
-  background: var(--carmine);
-  border-color: var(--carmine);
-  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
 .btn--primary:hover {
-  background: var(--carmine-dark);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 /* Botón secundario sobre fondo oscuro */
 .btn--outline-light {
@@ -57,8 +55,8 @@
   display: inline-block;
   padding: 1px 9px;
   border-radius: 99px;
-  background: var(--carmine);
-  color: #fff;
+  background: var(--accent);
+  color: var(--on-accent);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.06em;
@@ -71,7 +69,6 @@
 .btn--sm {
   min-height: 40px;
   padding: 0 var(--space-md);
-  box-shadow: 2px 2px 0 var(--ink);
 }
 
 .link {
@@ -161,14 +158,17 @@
   width: 30px;
   height: 30px;
 }
-.logo__bg {
-  fill: var(--blue);
+.logo span {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
 }
-.logo__post {
-  fill: var(--on-ink);
+.logo__main {
+  fill: var(--cobalto);
 }
-.logo__beam {
-  fill: var(--carmine);
+.logo__light {
+  fill: var(--ambar);
 }
 .nav__links {
   display: flex;
@@ -225,8 +225,8 @@
 .hero {
   position: relative;
   padding-block: var(--space-2xl) var(--space-3xl);
-  color: var(--on-ink);
-  background-color: var(--ink);
+  color: #fff;
+  background-color: var(--cobalto);
   background-image:
     linear-gradient(oklch(0.96 0.008 262 / 0.08) 1px, transparent 1px),
     linear-gradient(90deg, oklch(0.96 0.008 262 / 0.08) 1px, transparent 1px),
@@ -299,7 +299,7 @@
 }
 .hero__indent {
   padding-left: 0.85em;
-  color: var(--sky);
+  color: var(--ambar);
 }
 /* Palabra marcada a mano en rojo */
 .hero__circled {
@@ -327,7 +327,7 @@
   max-width: 34rem;
   font-size: var(--fs-md);
   line-height: 1.5;
-  color: var(--on-ink-muted);
+  color: #E3E8FF;
 }
 .hero__notes {
   counter-reset: note;
@@ -359,9 +359,7 @@
   flex-wrap: wrap;
   gap: var(--space-md);
 }
-.hero .btn--primary {
-  box-shadow: 3px 3px 0 oklch(0 0 0 / 0.35);
-}
+
 /* Cota horizontal bajo la portada */
 .hero__dim {
   position: relative;
@@ -382,7 +380,7 @@
 .hero__dim span {
   position: relative;
   padding-inline: var(--space-sm);
-  background: var(--ink);
+  background: var(--cobalto);
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   line-height: 22px;
@@ -449,7 +447,7 @@
   stroke-dasharray: 2 4;
 }
 .hb-card {
-  fill: var(--ink-surface);
+  fill: var(--blue-hover);
   stroke: #c9d6f2;
   stroke-width: 1.4;
 }
@@ -464,7 +462,7 @@
   fill: var(--carmine-light);
 }
 .hb-arrow {
-  stroke: #fff;
+  stroke: var(--on-accent);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -553,12 +551,12 @@
   border-color: #c9d6f2;
 }
 .hb__tab[aria-pressed='true'] {
-  background: var(--carmine-light);
-  border-color: var(--carmine-light);
-  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
 .hb__tab:focus-visible {
-  outline: 2px solid var(--sky);
+  outline: 2px solid var(--ambar);
   outline-offset: 3px;
 }
 
@@ -595,8 +593,8 @@
 
 .ticker {
   overflow: hidden;
-  background: var(--carmine);
-  color: #fff;
+  background: var(--accent);
+  color: var(--on-accent);
 }
 .ticker__track {
   display: flex;
@@ -620,7 +618,7 @@
 .ticker__mark {
   width: 16px;
   height: 16px;
-  fill: #fff;
+  fill: var(--on-accent);
 }
 @keyframes marquee {
   to {
@@ -674,7 +672,7 @@
   background: var(--blue-soft);
 }
 .selector__cell:has(input:checked) {
-  background: var(--ink);
+  background: var(--cobalto);
   color: var(--on-ink);
 }
 .selector__cell:has(input:focus-visible) {
@@ -733,7 +731,7 @@
   position: absolute;
   width: 14px;
   height: 14px;
-  border-color: var(--carmine);
+  border-color: var(--cobalto);
   border-style: solid;
 }
 .packs__drawing::before {
@@ -788,7 +786,7 @@
   stroke-width: 0.75;
 }
 .bp-pin {
-  fill: var(--carmine);
+  fill: var(--ambar);
 }
 .bp-leader {
   fill: none;
@@ -808,7 +806,7 @@
 }
 .bp-link {
   fill: none;
-  stroke: var(--carmine);
+  stroke: var(--cobalto);
   stroke-width: 1.5;
   stroke-dasharray: 5 5;
   animation: flow 1.2s linear infinite;
@@ -886,7 +884,7 @@
   animation: pop 420ms var(--ease-out) both;
 }
 .bp-marker circle {
-  fill: var(--carmine);
+  fill: var(--cobalto);
 }
 .bp-marker text {
   font-family: var(--font-mono);
@@ -907,7 +905,7 @@
   padding: var(--space-xl);
   background: var(--sheet);
   border: 1.5px solid var(--ink);
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: 0 1px 2px rgb(18 20 28 / 0.06), 0 12px 32px rgb(18 20 28 / 0.08);
   animation: spec-in 380ms var(--ease-out);
 }
 @keyframes spec-in {
@@ -960,7 +958,7 @@
   width: 16px;
   height: 16px;
   fill: none;
-  stroke: var(--carmine);
+  stroke: var(--cobalto);
   stroke-width: 1.5;
   stroke-linecap: round;
 }
@@ -999,7 +997,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--carmine);
+  background: var(--cobalto);
   color: var(--on-ink);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -1007,8 +1005,8 @@
 }
 .spec__key--plain {
   background: none;
-  color: var(--carmine);
-  border: 1.5px solid var(--carmine);
+  color: var(--cobalto);
+  border: 1.5px solid var(--cobalto);
 }
 .spec__cta {
   width: 100%;
@@ -1031,7 +1029,8 @@
     padding: var(--space-sm) var(--space-md);
   }
   .selector__name {
-    font-size: 1.125rem;
+    font-size: 0.95rem;
+    letter-spacing: -0.02em;
   }
   .selector__cell:nth-child(3) {
     border-left: 0;
@@ -1044,7 +1043,6 @@
   }
   .spec {
     padding: var(--space-lg);
-    box-shadow: 4px 4px 0 var(--ink);
   }
 }
 
@@ -1092,10 +1090,10 @@
   background: oklch(0.45 0.17 262 / 0.06);
 }
 .compare__table .is-rec {
-  background: oklch(0.54 0.19 25 / 0.05);
+  background: rgb(255 181 71 / 0.12);
 }
 .compare__table thead .is-rec {
-  background: var(--ink);
+  background: var(--cobalto);
   color: var(--on-ink);
 }
 .compare__feature {
@@ -1252,9 +1250,7 @@
   font-size: var(--fs-xs);
   color: var(--carmine-light);
 }
-.process .btn--primary {
-  box-shadow: 3px 3px 0 oklch(0 0 0 / 0.35);
-}
+
 
 @media (max-width: 960px) {
   .process__steps {
@@ -1308,7 +1304,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--carmine);
+  background: var(--cobalto);
   transition: transform 300ms var(--ease-out);
 }
 .faq__icon::before,
@@ -1376,7 +1372,7 @@
   justify-items: start;
   padding: var(--space-xl);
   background: var(--sheet);
-  border: 1.5px dashed var(--carmine);
+  border: 1.5px dashed var(--cobalto);
 }
 .clientia__kicker,
 .clientia__note {
@@ -1410,7 +1406,7 @@
   background: var(--sheet);
   border: 1.5px solid var(--ink);
   /* Margen rojo de cuaderno */
-  background-image: linear-gradient(90deg, transparent 22px, var(--carmine) 22px, var(--carmine) 23.5px, transparent 23.5px);
+  background-image: linear-gradient(90deg, transparent 22px, var(--ambar) 22px, var(--ambar) 25px, transparent 25px);
 }
 .note-card__head {
   display: flex;
@@ -1454,7 +1450,7 @@
 }
 .contact .form {
   color: var(--ink);
-  box-shadow: 8px 8px 0 var(--carmine);
+  box-shadow: 8px 8px 0 var(--ambar);
 }
 .contact .contact__direct a {
   color: var(--sky);
@@ -1482,7 +1478,7 @@
   padding: var(--space-xl);
   background: var(--sheet);
   border: 1.5px solid var(--ink);
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: 0 1px 2px rgb(18 20 28 / 0.06), 0 12px 32px rgb(18 20 28 / 0.08);
 }
 .form__row {
   display: grid;
@@ -1523,11 +1519,11 @@
   box-shadow: 0 0 0 3px var(--blue-soft);
 }
 .field.has-error input {
-  border-color: var(--carmine);
+  border-color: var(--error);
 }
 .field__error {
   font-size: var(--fs-xs);
-  color: var(--carmine);
+  color: var(--error);
 }
 .form__submit {
   justify-self: start;
@@ -1542,7 +1538,7 @@
   background: var(--blue-soft);
 }
 .form__status--error {
-  border-color: var(--carmine);
+  border-color: var(--error);
   background: oklch(0.95 0.03 25);
 }
 
@@ -1556,7 +1552,6 @@
 @media (max-width: 560px) {
   .form {
     padding: var(--space-lg);
-    box-shadow: 4px 4px 0 var(--ink);
   }
   .form__row {
     grid-template-columns: 1fr;

@@ -1,52 +1,67 @@
 /*! Lintel · rediseño 2026-11-09 */
 /*
- * TOKENS DE DISEÑO
- * Dirección: el plano. La web se presenta como una lámina técnica: papel cuadriculado,
- * líneas en tinta azul y anotaciones en rojo. Misma paleta y tipografías que la web del TPV.
+ * TOKENS DE DISEÑO · marca «Escuadra» (manual de marca v2.0, noviembre 2026)
+ * Cobalto (confianza) · Hormigón (orden) · Ámbar (acción). Proporción 60 · 30 · 10.
+ * Los nombres antiguos (--ink, --blue, --carmine…) se mantienen como alias de los nuevos papeles.
  */
 :root {
-  /* Papel */
-  --paper: oklch(0.982 0.004 262);
-  --paper-2: oklch(0.96 0.008 262);
-  --sheet: oklch(0.995 0.002 262);
-  --grid: oklch(0.93 0.012 262 / 0.7);
-  --grid-major: oklch(0.89 0.02 262 / 0.6);
-
-  /* Tinta */
-  --ink: oklch(0.25 0.045 265);
-  --ink-deep: oklch(0.2 0.04 265);
-  --muted: oklch(0.47 0.028 262);
-
   /* Marca */
-  --blue: oklch(0.45 0.17 262);
-  --blue-hover: oklch(0.39 0.16 262);
-  --blue-soft: oklch(0.93 0.03 262);
-  --carmine: oklch(0.54 0.19 25); /* acción principal, anotaciones, cotas y marcas */
-  --carmine-dark: oklch(0.46 0.17 25);
-  --carmine-light: oklch(0.66 0.17 25); /* rojo sobre fondo oscuro */
-  --sky: oklch(0.76 0.11 268); /* azul claro sobre fondo oscuro */
-  --ink-surface: oklch(0.3 0.045 265); /* tarjetas sobre fondo oscuro */
+  --cobalto: #2340C8;
+  --hormigon: #E7E8E4;
+  --ambar: #FFB547;
+  --tinta: #12141C;
+  --grafito: #555A66;
+
+  /* Fondos */
+  --paper: #F4F4F1;
+  --paper-2: var(--hormigon);
+  --sheet: #FFFFFF;
+  --grid: rgb(18 20 28 / 0.045);
+  --grid-major: rgb(18 20 28 / 0.07);
+
+  /* Texto */
+  --ink: var(--tinta);
+  --ink-deep: #0B0D13;
+  --muted: var(--grafito);
+
+  /* Color principal (cobalto) */
+  --blue: var(--cobalto);
+  --blue-hover: #1A33A8;
+  --blue-soft: #DCE3FF;
+  --sky: #9DB0FF; /* cobalto claro sobre fondo oscuro */
+
+  /* Acción (ámbar): fondo de botones, siempre con texto en tinta */
+  --accent: var(--ambar);
+  --accent-hover: #F2A42F;
+  --on-accent: var(--tinta);
+
+  /* Anotaciones: ámbar legible sobre claro y ámbar sobre oscuro */
+  --carmine: #8A5700;
+  --carmine-dark: #6E4600;
+  --carmine-light: var(--ambar);
+  --error: #B3261E;
+  --ink-surface: #1C1F2B; /* tarjetas sobre fondo oscuro */
 
   /* Líneas */
-  --rule: oklch(0.89 0.014 262);
-  --rule-strong: oklch(0.8 0.02 262);
+  --rule: #D3D5D0;
+  --rule-strong: #B9BCC4;
 
-  /* Sobre tinta */
-  --on-ink: oklch(0.96 0.008 262);
-  --on-ink-muted: oklch(0.8 0.025 262);
-  --rule-on-ink: oklch(0.96 0.008 262 / 0.18);
+  /* Sobre fondo oscuro */
+  --on-ink: #F4F4F1;
+  --on-ink-muted: #B9BDC8;
+  --rule-on-ink: rgb(244 244 241 / 0.16);
 
   /* Tipografía */
-  --font-display: 'Young Serif', Georgia, serif;
-  --font-body: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-display: 'Unbounded', 'Arial Black', Arial, sans-serif;
+  --font-body: 'Manrope Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --fs-xs: 0.8125rem;
   --fs-sm: 0.9375rem;
   --fs-base: 1.0625rem;
   --fs-md: 1.3125rem;
   --fs-lg: clamp(1.45rem, 1.25rem + 0.8vw, 1.75rem);
-  --fs-xl: clamp(2rem, 1.45rem + 2.2vw, 2.85rem);
-  --fs-hero: clamp(2.5rem, 1.5rem + 3.6vw, 4.25rem);
+  --fs-xl: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+  --fs-hero: clamp(2.1rem, 1.3rem + 3vw, 3.6rem);
 
   /* Espaciado: escala de 4pt */
   --space-2xs: 0.25rem;

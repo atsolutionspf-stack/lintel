@@ -5,12 +5,11 @@ export function Nav() {
     <header className="nav">
       <div className="container nav__inner">
         <a href="#inicio" className="logo" aria-label={site.name}>
-          {/* Un dintel: dos pilares y la viga que los une */}
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <rect className="logo__bg" width="32" height="32" rx="7" />
-            <rect className="logo__post" x="9" y="13" width="4" height="12" />
-            <rect className="logo__post" x="19" y="13" width="4" height="12" />
-            <rect className="logo__beam" x="6" y="8" width="20" height="4.5" />
+          {/* «Escuadra»: la viga apoyada en su jamba y el cuadrado de luz que entra */}
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <rect className="logo__main" x="6" y="7" width="36" height="9" />
+            <rect className="logo__main" x="6" y="16" width="9" height="26" />
+            <rect className="logo__light" x="25" y="25" width="11" height="11" />
           </svg>
           <span>{site.name}</span>
         </a>
