@@ -1,34 +1,57 @@
 /**
- * Intro de entrada: el visitante atraviesa la abertura del dintel («la abertura: tu web»).
+ * Intro de entrada: «entrar a través de Lintel».
  *
- * 1. Fondo papel a pantalla completa con el dintel centrado: viga ámbar, jambas y umbral cobalto.
- * 2. Tras 150 ms, la abertura deja ver la página real, ya renderizada detrás (es un hueco
- *    recortado en el overlay, no una captura). Fuera del hueco el overlay sigue opaco.
- * 3. El dintel y su hueco crecen juntos, con escala uniforme y origen en el centro del hueco,
- *    hasta que el hueco cubre toda la pantalla. Entonces se retira el overlay.
+ * El símbolo real (viga y jamba cobalto, cuadrado de luz ámbar; geometría en config/logo.ts)
+ * es la estructura. En su hueco hay dos hojas de puerta cobalto; el cuadrado ámbar está sobre
+ * ellas con las puertas cerradas y, al abrirse, se convierte en la luz que sale del hueco.
  *
- * La página no se escala: solo crece la abertura por la que se ve.
+ * 1. 0–500 ms: fondo papel, símbolo centrado y puertas cerradas.
+ * 2. Las puertas giran hacia dentro sobre sus bordes exteriores (perspectiva simulada:
+ *    el borde interior se estrecha y se oscurece al alejarse). La viga y la jamba no se mueven.
+ * 3. Por la separación central sale luz ámbar que crece al abrirse y alumbra los bordes.
+ *    Dentro solo hay luz: la web todavía no se ve.
+ * 4. Con las puertas abiertas, la cámara avanza hacia el hueco hasta que la luz llena
+ *    la pantalla, y el overlay se funde con la portada.
+ *
  * Solo en la primera visita de cada pestaña (sessionStorage), nunca con ancla en la URL
  * ni con movimiento reducido. Se puede saltar con el botón o con Escape.
  * Se ejecuta antes del primer render de React, así la página no asoma antes de tiempo.
  */
-import { LINTEL_BEAM, LINTEL_OPENING, LINTEL_POSTS, LINTEL_THRESHOLD } from '../config/logo';
+import { LOGO_BEAM, LOGO_LIGHT, LOGO_OPENING, LOGO_POST } from '../config/logo';
 
 const STORAGE_KEY = 'lintel-intro-vista';
 const NS = 'http://www.w3.org/2000/svg';
 
-/** Tiempos en ms (total 1400). La portada empieza a animarse cuando ya se ve por el hueco. */
-const T = { hold: 150, reveal: 300, zoomStart: 300, total: 1400 };
+/** Tiempos en ms (total 2500). */
+const T = { hold: 500, open: 1000, zoomStart: 1350, zoom: 950, fadeStart: 2100, total: 2500 };
+/** Ángulo final de las puertas (grados): casi de canto, sin llegar a desaparecer. */
+const OPEN_ANGLE = 80;
 
-const COLORS = { paper: '#F4F4F1', beam: '#FFB547', frame: '#2340C8' };
+const COLORS = {
+  paper: '#F4F4F1',
+  cobalt: '#2340C8',
+  cobaltDeep: '#16288A',
+  amber: '#FFB547',
+  lightCore: '#FFF4DE',
+};
 
-/** Ancho total del dintel (lo marca el umbral) y alto de la viga al umbral. */
-const SYMBOL_W = LINTEL_THRESHOLD.width;
-const SYMBOL_H = LINTEL_THRESHOLD.y + LINTEL_THRESHOLD.height - LINTEL_BEAM.y;
+/** Holgura entre marco y puertas (unidades de la retícula de 48): mantiene legible la escuadra. */
+const GAP = 0.7;
+const DOOR = {
+  x: LOGO_OPENING.x + GAP,
+  y: LOGO_OPENING.y + GAP,
+  width: LOGO_OPENING.width - GAP,
+  height: LOGO_OPENING.height - GAP,
+};
+const LEAF = DOOR.width / 2;
 
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
 const progress = (now: number, start: number, length: number) => clamp01((now - start) / length);
+const mix = (a: string, b: string, k: number) => {
+  const c = (h: string, i: number) => parseInt(h.slice(1 + i * 2, 3 + i * 2), 16);
+  return `rgb(${[0, 1, 2].map((i) => Math.round(c(a, i) + (c(b, i) - c(a, i)) * k)).join(' ')})`;
+};
 
 function shouldPlay(): boolean {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
@@ -98,59 +121,100 @@ export function startIntro(): void {
   try {
     const svg = el('svg', { width: '100%', height: '100%' }, overlay);
     const defs = el('defs', {}, svg);
+    const ox = LOGO_OPENING.x + LOGO_OPENING.width / 2;
+    const oy = LOGO_OPENING.y + LOGO_OPENING.height / 2;
 
-    // Máscara: todo el overlay es opaco salvo la abertura
-    const mask = el('mask', { id: 'intro-mask', maskUnits: 'userSpaceOnUse' }, defs);
-    const maskBg = el('rect', { x: 0, y: 0, fill: 'white' }, mask);
-    const maskGroup = el('g', {}, mask);
-    el('rect', { ...LINTEL_OPENING, fill: 'black' }, maskGroup);
+    // Luz: cálida y más clara en el centro del hueco
+    const lightGrad = el('radialGradient', { id: 'intro-light', cx: '50%', cy: '50%', r: '70%' }, defs);
+    el('stop', { offset: '0', 'stop-color': COLORS.lightCore }, lightGrad);
+    el('stop', { offset: '1', 'stop-color': COLORS.amber }, lightGrad);
+    // Halo que se derrama sobre el marco y el borde inferior (el umbral)
+    const glowGrad = el('radialGradient', { id: 'intro-glow' }, defs);
+    el('stop', { offset: '0', 'stop-color': COLORS.amber, 'stop-opacity': 0.55 }, glowGrad);
+    el('stop', { offset: '1', 'stop-color': COLORS.amber, 'stop-opacity': 0 }, glowGrad);
 
-    const ground = el('rect', { x: 0, y: 0, fill: COLORS.paper, mask: 'url(#intro-mask)' }, svg);
+    const ground = el('rect', { x: 0, y: 0, fill: COLORS.paper }, svg);
+    const scene = el('g', {}, svg);
 
-    // El dintel: la abertura empieza cubierta de papel y se aclara para dejar ver la web
-    const symbol = el('g', {}, svg);
-    const cover = el('rect', { ...LINTEL_OPENING, fill: COLORS.paper }, symbol);
-    el('rect', { ...LINTEL_BEAM, fill: COLORS.beam }, symbol);
-    for (const post of LINTEL_POSTS) el('rect', { ...post, fill: COLORS.frame }, symbol);
-    el('rect', { ...LINTEL_THRESHOLD, fill: COLORS.frame }, symbol);
+    const glow = el('ellipse', { cx: ox, cy: oy + 4, rx: 30, ry: 26, fill: 'url(#intro-glow)', opacity: 0 }, scene);
+    // Dentro del hueco solo hay luz
+    const light = el('rect', { ...LOGO_OPENING, fill: 'url(#intro-light)', opacity: 0 }, scene);
 
-    // Escala uniforme (nunca deforma el dintel). La final hace que la abertura cubra la pantalla
-    // con un pequeño margen, así jambas, viga y umbral quedan fuera antes de retirar el overlay.
+    // Hojas de puerta: polígonos que se recalculan en cada fotograma
+    const leftDoor = el('polygon', { fill: COLORS.cobalt }, scene);
+    const rightDoor = el('polygon', { fill: COLORS.cobalt }, scene);
+    const leftEdge = el('line', { stroke: COLORS.amber, 'stroke-width': 0.35, opacity: 0 }, scene);
+    const rightEdge = el('line', { stroke: COLORS.amber, 'stroke-width': 0.35, opacity: 0 }, scene);
+
+    // El marco del logo, encima y fijo
+    el('rect', { ...LOGO_BEAM, fill: COLORS.cobalt }, scene);
+    el('rect', { ...LOGO_POST, fill: COLORS.cobalt }, scene);
+    // El cuadrado de luz del logo, sobre las puertas cerradas: al abrirse se convierte en la luz
+    const square = el('rect', { ...LOGO_LIGHT, fill: COLORS.amber }, scene);
+
+    const top = DOOR.y;
+    const bottom = DOOR.y + DOOR.height;
+    const mid = (top + bottom) / 2;
+    /** Coloca una hoja girada `deg` grados. side = -1 izquierda (bisagra a la izquierda), 1 derecha. */
+    const setDoor = (door: SVGPolygonElement, edge: SVGLineElement, side: -1 | 1, deg: number, lit: number) => {
+      const a = (deg * Math.PI) / 180;
+      const hinge = side < 0 ? DOOR.x : DOOR.x + DOOR.width;
+      const inner = hinge - side * LEAF * Math.cos(a);
+      // Al alejarse, el borde interior se ve más corto (perspectiva)
+      const half = (DOOR.height / 2) * (1 - 0.16 * Math.sin(a));
+      door.setAttribute('points', `${hinge},${top} ${inner},${mid - half} ${inner},${mid + half} ${hinge},${bottom}`);
+      door.setAttribute('fill', mix(COLORS.cobalt, COLORS.cobaltDeep, Math.sin(a) * 0.85));
+      edge.setAttribute('x1', String(inner));
+      edge.setAttribute('x2', String(inner));
+      edge.setAttribute('y1', String(mid - half));
+      edge.setAttribute('y2', String(mid + half));
+      edge.setAttribute('opacity', String(lit * 0.9));
+    };
+
+    // Escala uniforme (nunca deforma el símbolo). La final hace que la parte del hueco que solo
+    // tiene luz (entre las hojas abiertas) cubra la pantalla.
     let startScale = 1;
     let endScale = 1;
     let cx = 0;
     let cy = 0;
-    const ox = LINTEL_OPENING.x + LINTEL_OPENING.width / 2;
-    const oy = LINTEL_OPENING.y + LINTEL_OPENING.height / 2;
+    const openLeaf = LEAF * Math.cos((OPEN_ANGLE * Math.PI) / 180);
+    const clearW = DOOR.width - 2 * openLeaf;
+    const clearH = DOOR.height * (1 - 0.16 * Math.sin((OPEN_ANGLE * Math.PI) / 180));
     layout = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      for (const r of [maskBg, ground]) {
-        r.setAttribute('width', String(w));
-        r.setAttribute('height', String(h));
-      }
-      startScale = Math.min((w * 0.62) / SYMBOL_W, (h * 0.42) / SYMBOL_H, 1.2);
-      endScale = Math.max(w / LINTEL_OPENING.width, h / LINTEL_OPENING.height) * 1.04;
+      ground.setAttribute('width', String(w));
+      ground.setAttribute('height', String(h));
+      startScale = Math.min(Math.max(Math.min(w, h) * 0.34, 128), 230) / 48;
+      endScale = Math.max(w / clearW, h / clearH) * 1.15;
       cx = w / 2;
       cy = h / 2;
     };
     layout();
 
     const place = (k: number) => {
-      // Interpolación geométrica: el acercamiento se percibe a ritmo constante, sin tirón final
+      // Interpolación geométrica: la cámara avanza a ritmo constante, sin tirón final.
+      // El símbolo entero va centrado al principio y el hueco al final.
       const s = startScale * Math.pow(endScale / startScale, k);
-      // El centro de la abertura queda en el centro de la pantalla y todo crece desde ahí
-      const tf = `translate(${cx} ${cy}) scale(${s}) translate(${-ox} ${-oy})`;
-      symbol.setAttribute('transform', tf);
-      maskGroup.setAttribute('transform', tf);
+      const fx = 24 + (ox - 24) * k;
+      const fy = 24 + (oy - 24) * k;
+      scene.setAttribute('transform', `translate(${cx} ${cy}) scale(${s}) translate(${-fx} ${-fy})`);
     };
 
     const frame = (now: number) => {
       if (done) return;
       const t = now - start;
-      cover.setAttribute('opacity', String(1 - easeInOut(progress(t, T.hold, T.reveal))));
-      place(easeInOut(progress(t, T.zoomStart, T.total - T.zoomStart)));
-      if (t >= T.hold) root.classList.remove('intro-playing');
+      const o = easeInOut(progress(t, T.hold, T.open));
+      const lit = easeInOut(progress(t, T.hold + 50, T.open));
+      setDoor(leftDoor, leftEdge, -1, OPEN_ANGLE * o, lit);
+      setDoor(rightDoor, rightEdge, 1, OPEN_ANGLE * o, lit);
+      light.setAttribute('opacity', String(lit));
+      square.setAttribute('opacity', String(1 - easeInOut(progress(t, T.hold, T.open * 0.35))));
+      glow.setAttribute('opacity', String(lit));
+      place(easeInOut(progress(t, T.zoomStart, T.zoom)));
+      const fade = easeInOut(progress(t, T.fadeStart, T.total - T.fadeStart));
+      overlay.style.opacity = String(1 - fade);
+      if (t >= T.fadeStart) root.classList.remove('intro-playing');
       if (t >= T.total) {
         finish();
         return;
@@ -158,6 +222,8 @@ export function startIntro(): void {
       raf = requestAnimationFrame(frame);
     };
 
+    setDoor(leftDoor, leftEdge, -1, 0, 0);
+    setDoor(rightDoor, rightEdge, 1, 0, 0);
     place(0);
     root.classList.add('intro-playing');
     root.style.overflow = 'hidden';
