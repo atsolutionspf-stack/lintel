@@ -5,7 +5,14 @@
  * es la estructura. En su hueco hay dos hojas de puerta cobalto; el cuadrado ámbar está sobre
  * ellas con las puertas cerradas y, al abrirse, se convierte en la luz que sale del hueco.
  *
- * 1. 0–500 ms: fondo papel, símbolo centrado y puertas cerradas.
+ * Una sola línea temporal (ms) con fases solapadas, para que se sienta como un movimiento:
+ *   0–800      puertas cerradas y quietas
+ *   800–2800   apertura de las dos hojas
+ *   1000–3000  la luz crece con la apertura
+ *   2400–3500  acercamiento al hueco (solapado con el final de la apertura)
+ *   3300–4100  la luz cubre la pantalla y el overlay se funde con la portada
+ *
+ * 1. Fondo papel, símbolo centrado y puertas cerradas.
  * 2. Las puertas giran hacia dentro sobre sus bordes exteriores (perspectiva simulada:
  *    el borde interior se estrecha y se oscurece al alejarse). La viga y la jamba no se mueven.
  * 3. Por la separación central sale luz ámbar que crece al abrirse y alumbra los bordes.
@@ -22,8 +29,15 @@ import { LOGO_BEAM, LOGO_LIGHT, LOGO_OPENING, LOGO_POST } from '../config/logo';
 const STORAGE_KEY = 'lintel-intro-vista';
 const NS = 'http://www.w3.org/2000/svg';
 
-/** Tiempos en ms (total 2500). */
-const T = { hold: 500, open: 1000, zoomStart: 1350, zoom: 950, fadeStart: 2100, total: 2500 };
+/** Línea temporal en ms: [inicio, fin] de cada fase. */
+const T = {
+  doors: [800, 2800],
+  light: [1000, 3000],
+  square: [800, 1700],
+  zoom: [2400, 3500],
+  fade: [3300, 4100],
+  total: 4100,
+} as const;
 /** Ángulo final de las puertas (grados): casi de canto, sin llegar a desaparecer. */
 const OPEN_ANGLE = 80;
 
@@ -45,9 +59,24 @@ const DOOR = {
 };
 const LEAF = DOOR.width / 2;
 
-const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+/** cubic-bezier(x1, 0, x2, 1) como en CSS: resuelve x por Newton y devuelve y. */
+function bezier(x1: number, x2: number) {
+  const coord = (t: number, p1: number, p2: number) => 3 * (1 - t) * (1 - t) * t * p1 + 3 * (1 - t) * t * t * p2 + t * t * t;
+  const slope = (t: number, p1: number, p2: number) => 3 * (1 - t) * (1 - t) * p1 + 6 * (1 - t) * t * (p2 - p1) + 3 * t * t * (1 - p2);
+  return (x: number) => {
+    let t = x;
+    for (let i = 0; i < 8; i++) {
+      const d = slope(t, x1, x2);
+      if (Math.abs(d) < 1e-6) break;
+      t -= (coord(t, x1, x2) - x) / d;
+    }
+    return coord(Math.min(1, Math.max(0, t)), 0, 1);
+  };
+}
+/** Arranca suave, gana algo de velocidad y frena al final, sin rebote. */
+const ease = bezier(0.45, 0.55);
 const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
-const progress = (now: number, start: number, length: number) => clamp01((now - start) / length);
+const phase = (now: number, [start, end]: readonly [number, number]) => ease(clamp01((now - start) / (end - start)));
 const mix = (a: string, b: string, k: number) => {
   const c = (h: string, i: number) => parseInt(h.slice(1 + i * 2, 3 + i * 2), 16);
   return `rgb(${[0, 1, 2].map((i) => Math.round(c(a, i) + (c(b, i) - c(a, i)) * k)).join(' ')})`;
@@ -186,7 +215,8 @@ export function startIntro(): void {
       ground.setAttribute('width', String(w));
       ground.setAttribute('height', String(h));
       startScale = Math.min(Math.max(Math.min(w, h) * 0.34, 128), 230) / 48;
-      endScale = Math.max(w / clearW, h / clearH) * 1.15;
+      // Margen amplio: la luz ya cubre la pantalla antes de que empiece el fundido
+      endScale = Math.max(w / clearW, h / clearH) * 1.4;
       cx = w / 2;
       cy = h / 2;
     };
@@ -204,17 +234,17 @@ export function startIntro(): void {
     const frame = (now: number) => {
       if (done) return;
       const t = now - start;
-      const o = easeInOut(progress(t, T.hold, T.open));
-      const lit = easeInOut(progress(t, T.hold + 50, T.open));
+      // Cada valor sale del mismo reloj: ninguna fase reinicia lo que dejó la anterior
+      const o = phase(t, T.doors);
+      const lit = phase(t, T.light);
       setDoor(leftDoor, leftEdge, -1, OPEN_ANGLE * o, lit);
       setDoor(rightDoor, rightEdge, 1, OPEN_ANGLE * o, lit);
       light.setAttribute('opacity', String(lit));
-      square.setAttribute('opacity', String(1 - easeInOut(progress(t, T.hold, T.open * 0.35))));
       glow.setAttribute('opacity', String(lit));
-      place(easeInOut(progress(t, T.zoomStart, T.zoom)));
-      const fade = easeInOut(progress(t, T.fadeStart, T.total - T.fadeStart));
-      overlay.style.opacity = String(1 - fade);
-      if (t >= T.fadeStart) root.classList.remove('intro-playing');
+      square.setAttribute('opacity', String(1 - phase(t, T.square)));
+      place(phase(t, T.zoom));
+      overlay.style.opacity = String(1 - phase(t, T.fade));
+      if (t >= T.fade[0]) root.classList.remove('intro-playing');
       if (t >= T.total) {
         finish();
         return;

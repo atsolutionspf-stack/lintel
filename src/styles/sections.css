@@ -1924,6 +1924,7 @@
   inset: 0;
   z-index: 100;
   pointer-events: auto;
+  will-change: opacity; /* el fundido final va en su propia capa */
 }
 .intro svg {
   display: block;
