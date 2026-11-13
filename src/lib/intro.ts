@@ -1,31 +1,36 @@
 /**
- * Intro de entrada: el visitante atraviesa la puerta del logo.
+ * Intro de entrada: el visitante atraviesa la abertura del dintel («la abertura: tu web»).
  *
- * 1. Fondo tinta a pantalla completa con el símbolo centrado y dos puertas cerradas en su hueco.
- * 2. Tras 150 ms, las puertas se deslizan hacia los lados. La viga y la jamba no se mueven.
- *    Por el hueco (una máscara recortada en el overlay) se ve la página real, ya renderizada.
- * 3. El símbolo crece hasta que el hueco cubre la pantalla; el marco sale y el overlay desaparece.
+ * 1. Fondo papel a pantalla completa con el dintel centrado: viga ámbar, jambas y umbral cobalto.
+ * 2. Tras 150 ms, la abertura deja ver la página real, ya renderizada detrás (es un hueco
+ *    recortado en el overlay, no una captura). Fuera del hueco el overlay sigue opaco.
+ * 3. El dintel y su hueco crecen juntos, con escala uniforme y origen en el centro del hueco,
+ *    hasta que el hueco cubre toda la pantalla. Entonces se retira el overlay.
  *
+ * La página no se escala: solo crece la abertura por la que se ve.
  * Solo en la primera visita de cada pestaña (sessionStorage), nunca con ancla en la URL
  * ni con movimiento reducido. Se puede saltar con el botón o con Escape.
  * Se ejecuta antes del primer render de React, así la página no asoma antes de tiempo.
  */
-import { LOGO_BEAM, LOGO_LIGHT, LOGO_OPENING, LOGO_POST } from '../config/logo';
+import { LINTEL_BEAM, LINTEL_OPENING, LINTEL_POSTS, LINTEL_THRESHOLD } from '../config/logo';
 
 const STORAGE_KEY = 'lintel-intro-vista';
 const NS = 'http://www.w3.org/2000/svg';
 
-/** Tiempos en ms (total 1400). */
-const T = { hold: 150, doors: 500, zoomStart: 560, zoom: 740, fadeStart: 1250, total: 1400, heroStart: 620 };
+/** Tiempos en ms (total 1400). La portada empieza a animarse cuando ya se ve por el hueco. */
+const T = { hold: 150, reveal: 300, zoomStart: 300, total: 1400 };
 
-const COLORS = { ink: '#12141C', frame: '#9DB0FF', light: '#FFB547', door: '#232838', seam: '#3A4157' };
+const COLORS = { paper: '#F4F4F1', beam: '#FFB547', frame: '#2340C8' };
+
+/** Ancho total del dintel (lo marca el umbral) y alto de la viga al umbral. */
+const SYMBOL_W = LINTEL_THRESHOLD.width;
+const SYMBOL_H = LINTEL_THRESHOLD.y + LINTEL_THRESHOLD.height - LINTEL_BEAM.y;
 
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
 const progress = (now: number, start: number, length: number) => clamp01((now - start) / length);
 
 function shouldPlay(): boolean {
-  if (location.hash) return false;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
   try {
     if (sessionStorage.getItem(STORAGE_KEY)) return false;
@@ -45,9 +50,8 @@ function el<K extends keyof SVGElementTagNameMap>(name: K, attrs: Record<string,
 }
 
 export function startIntro(): void {
-  // Siempre marcamos la sesión, aunque se omita por ancla: así no salta a mitad de la visita.
-  const anchored = Boolean(location.hash);
-  if (anchored) {
+  // Con ancla se omite, pero marcamos la sesión: así no salta a mitad de la visita.
+  if (location.hash) {
     try {
       sessionStorage.setItem(STORAGE_KEY, '1');
     } catch {
@@ -95,41 +99,29 @@ export function startIntro(): void {
     const svg = el('svg', { width: '100%', height: '100%' }, overlay);
     const defs = el('defs', {}, svg);
 
-    // Máscara: todo el overlay es opaco salvo el hueco del logo
+    // Máscara: todo el overlay es opaco salvo la abertura
     const mask = el('mask', { id: 'intro-mask', maskUnits: 'userSpaceOnUse' }, defs);
     const maskBg = el('rect', { x: 0, y: 0, fill: 'white' }, mask);
     const maskGroup = el('g', {}, mask);
-    el('rect', { ...LOGO_OPENING, fill: 'black' }, maskGroup);
+    el('rect', { ...LINTEL_OPENING, fill: 'black' }, maskGroup);
 
-    // Recorte de las puertas: no salen del hueco (un clipPath solo admite formas, no grupos)
-    const clip = el('clipPath', { id: 'intro-doors', clipPathUnits: 'userSpaceOnUse' }, defs);
-    const clipRect = el('rect', { ...LOGO_OPENING }, clip);
+    const ground = el('rect', { x: 0, y: 0, fill: COLORS.paper, mask: 'url(#intro-mask)' }, svg);
 
-    const ground = el('rect', { x: 0, y: 0, fill: COLORS.ink, mask: 'url(#intro-mask)' }, svg);
+    // El dintel: la abertura empieza cubierta de papel y se aclara para dejar ver la web
+    const symbol = el('g', {}, svg);
+    const cover = el('rect', { ...LINTEL_OPENING, fill: COLORS.paper }, symbol);
+    el('rect', { ...LINTEL_BEAM, fill: COLORS.beam }, symbol);
+    for (const post of LINTEL_POSTS) el('rect', { ...post, fill: COLORS.frame }, symbol);
+    el('rect', { ...LINTEL_THRESHOLD, fill: COLORS.frame }, symbol);
 
-    const logo = el('g', {}, svg);
-    const doors = el('g', { 'clip-path': 'url(#intro-doors)' }, svg);
-    const doorsInner = el('g', {}, doors);
-    const half = LOGO_OPENING.width / 2;
-    const leftDoor = el('g', {}, doorsInner);
-    el('rect', { x: LOGO_OPENING.x, y: LOGO_OPENING.y, width: half, height: LOGO_OPENING.height, fill: COLORS.door }, leftDoor);
-    el('rect', { x: LOGO_OPENING.x + half - 0.35, y: LOGO_OPENING.y, width: 0.35, height: LOGO_OPENING.height, fill: COLORS.seam }, leftDoor);
-    const rightDoor = el('g', {}, doorsInner);
-    el('rect', { x: LOGO_OPENING.x + half, y: LOGO_OPENING.y, width: half, height: LOGO_OPENING.height, fill: COLORS.door }, rightDoor);
-    el('rect', { x: LOGO_OPENING.x + half, y: LOGO_OPENING.y, width: 0.35, height: LOGO_OPENING.height, fill: COLORS.seam }, rightDoor);
-
-    // El símbolo real encima: viga, jamba y el cuadrado de luz
-    el('rect', { ...LOGO_BEAM, fill: COLORS.frame }, logo);
-    el('rect', { ...LOGO_POST, fill: COLORS.frame }, logo);
-    const light = el('rect', { ...LOGO_LIGHT, fill: COLORS.light }, logo);
-
-    // Escala uniforme (nunca deforma el logo) y zoom necesario para que el hueco cubra la pantalla
-    let unit = 1;
-    let zoomTo = 1;
+    // Escala uniforme (nunca deforma el dintel). La final hace que la abertura cubra la pantalla
+    // con un pequeño margen, así jambas, viga y umbral quedan fuera antes de retirar el overlay.
+    let startScale = 1;
+    let endScale = 1;
     let cx = 0;
     let cy = 0;
-    const ox = LOGO_OPENING.x + LOGO_OPENING.width / 2;
-    const oy = LOGO_OPENING.y + LOGO_OPENING.height / 2;
+    const ox = LINTEL_OPENING.x + LINTEL_OPENING.width / 2;
+    const oy = LINTEL_OPENING.y + LINTEL_OPENING.height / 2;
     layout = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
@@ -137,30 +129,28 @@ export function startIntro(): void {
         r.setAttribute('width', String(w));
         r.setAttribute('height', String(h));
       }
-      unit = Math.min(Math.max(Math.min(w, h) * 0.32, 120), 220) / 48;
+      startScale = Math.min((w * 0.62) / SYMBOL_W, (h * 0.42) / SYMBOL_H, 1.2);
+      endScale = Math.max(w / LINTEL_OPENING.width, h / LINTEL_OPENING.height) * 1.04;
       cx = w / 2;
       cy = h / 2;
-      zoomTo = Math.max(w / (LOGO_OPENING.width * unit), h / (LOGO_OPENING.height * unit)) * 1.25;
     };
     layout();
 
-    const place = (zoom: number) => {
-      const s = unit * zoom;
-      // El centro del hueco queda en el centro de la pantalla y crece desde ahí
+    const place = (k: number) => {
+      // Interpolación geométrica: el acercamiento se percibe a ritmo constante, sin tirón final
+      const s = startScale * Math.pow(endScale / startScale, k);
+      // El centro de la abertura queda en el centro de la pantalla y todo crece desde ahí
       const tf = `translate(${cx} ${cy}) scale(${s}) translate(${-ox} ${-oy})`;
-      for (const g of [logo, maskGroup, clipRect, doorsInner]) g.setAttribute('transform', tf);
+      symbol.setAttribute('transform', tf);
+      maskGroup.setAttribute('transform', tf);
     };
 
     const frame = (now: number) => {
       if (done) return;
       const t = now - start;
-      const d = easeInOut(progress(t, T.hold, T.doors));
-      leftDoor.setAttribute('transform', `translate(${-half * d} 0)`);
-      rightDoor.setAttribute('transform', `translate(${half * d} 0)`);
-      light.setAttribute('opacity', String(1 - easeInOut(progress(t, T.hold, T.doors * 0.7))));
-      place(1 + (zoomTo - 1) * easeInOut(progress(t, T.zoomStart, T.zoom)));
-      overlay.style.opacity = String(1 - progress(t, T.fadeStart, T.total - T.fadeStart));
-      if (t >= T.heroStart) root.classList.remove('intro-playing');
+      cover.setAttribute('opacity', String(1 - easeInOut(progress(t, T.hold, T.reveal))));
+      place(easeInOut(progress(t, T.zoomStart, T.total - T.zoomStart)));
+      if (t >= T.hold) root.classList.remove('intro-playing');
       if (t >= T.total) {
         finish();
         return;
@@ -168,7 +158,7 @@ export function startIntro(): void {
       raf = requestAnimationFrame(frame);
     };
 
-    place(1);
+    place(0);
     root.classList.add('intro-playing');
     root.style.overflow = 'hidden';
     document.body.append(overlay, skip);

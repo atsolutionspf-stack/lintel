@@ -1951,7 +1951,7 @@
   outline: 3px solid var(--ambar);
   outline-offset: 2px;
 }
-/* Mientras las puertas están cerradas, la portada espera: sus animaciones empiezan al atravesar */
+/* Mientras la abertura está cerrada, la portada espera: sus animaciones empiezan cuando ya se ve */
 .intro-playing .hero__title > span,
 .intro-playing .hero__circled::after,
 .intro-playing .hb,
