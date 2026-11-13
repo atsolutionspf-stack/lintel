@@ -1,4 +1,5 @@
 import { site } from '../config/site';
+import { LOGO_BEAM, LOGO_LIGHT, LOGO_POST, LOGO_VIEWBOX } from '../config/logo';
 
 export function Nav() {
   return (
@@ -6,10 +7,10 @@ export function Nav() {
       <div className="container nav__inner">
         <a href="#inicio" className="logo" aria-label={site.name}>
           {/* «Escuadra»: la viga apoyada en su jamba y el cuadrado de luz que entra */}
-          <svg viewBox="0 0 48 48" aria-hidden="true">
-            <rect className="logo__main" x="6" y="7" width="36" height="9" />
-            <rect className="logo__main" x="6" y="16" width="9" height="26" />
-            <rect className="logo__light" x="25" y="25" width="11" height="11" />
+          <svg viewBox={`0 0 ${LOGO_VIEWBOX} ${LOGO_VIEWBOX}`} aria-hidden="true">
+            <rect className="logo__main" {...LOGO_BEAM} />
+            <rect className="logo__main" {...LOGO_POST} />
+            <rect className="logo__light" {...LOGO_LIGHT} />
           </svg>
           <span>{site.name}</span>
         </a>

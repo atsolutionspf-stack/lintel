@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { PackId } from './config/packs';
 import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
@@ -23,6 +23,12 @@ export default function App() {
     setFormPack(p);
   };
   useReveal();
+
+  // Si se entra por un enlace con ancla (/#packs), ir a esa sección cuando ya está pintada.
+  useEffect(() => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (id) document.getElementById(id)?.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }, []);
 
   const request = (pack: string) => {
     setFormPack(pack);

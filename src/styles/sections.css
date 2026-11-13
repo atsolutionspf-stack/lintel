@@ -1916,3 +1916,48 @@
     border-right: 0;
   }
 }
+
+/* ───────── Intro de entrada (src/lib/intro.ts) ───────── */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: auto;
+}
+.intro svg {
+  display: block;
+}
+.intro-skip {
+  position: fixed;
+  z-index: 101;
+  top: calc(16px + env(safe-area-inset-top, 0px));
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  background: rgb(18 20 28 / 0.6);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  cursor: pointer;
+}
+.intro-skip:hover {
+  border-color: #fff;
+}
+.intro-skip:focus-visible {
+  outline: 3px solid var(--ambar);
+  outline-offset: 2px;
+}
+/* Mientras las puertas están cerradas, la portada espera: sus animaciones empiezan al atravesar */
+.intro-playing .hero__title > span,
+.intro-playing .hero__circled::after,
+.intro-playing .hb,
+.intro-playing .hb *,
+.intro-playing .hero__pulse::after,
+.intro-playing .btn--hero::after,
+.intro-playing .btn--hero__arrow {
+  animation-play-state: paused;
+}

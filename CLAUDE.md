@@ -41,6 +41,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 | Textos de los packs y del mantenimiento | `src/config/packs.ts` |
 | Resto de textos, email, destino del formulario, bloque y enlace de Clientia (`clientia`, `clientiaUrl`) | `src/config/site.ts` |
 | Plano de la web (dibujo SVG que cambia según el pack) | `src/components/Blueprint.tsx` |
+| Intro de entrada (puertas del logo; solo la primera visita de cada pestaña) | `src/lib/intro.ts`, geometría del logo en `src/config/logo.ts` |
 | Portada y su plano animado | `src/components/Hero.tsx`, `src/components/HeroBlueprint.tsx` |
 | Cinta (ticker) | `src/components/Ticker.tsx` (textos en `site.ticker`) |
 | Selector de packs y ficha del pack | `src/components/Packs.tsx` |
