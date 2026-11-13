@@ -1,16 +1,18 @@
-import { useState } from 'react';
 import { formatMoney } from '../i18n';
 import { recommendedPack, webPacks, type PackId } from '../config/packs';
 import { site } from '../config/site';
 import { Blueprint, markerCount } from './Blueprint';
 import { SheetLabel } from './SheetLabel';
+import { useCountUp } from '../hooks/useCountUp';
 
-export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
+type Props = { selected: PackId; onSelect: (pack: PackId) => void; onRequest: (pack: PackId) => void };
+
+export function Packs({ selected, onSelect: setSelected, onRequest }: Props) {
   const t = site.packs;
-  const [selected, setSelected] = useState<PackId>('avanzada');
   const index = webPacks.findIndex((p) => p.id === selected);
   const pack = webPacks[index];
   const markers = markerCount(pack.id);
+  const shownPrice = useCountUp(Number(pack.price ?? 0));
   const dimLabel = `${String(index + 1).padStart(2, '0')} · ${pack.name}${pack.price ? ` · ${formatMoney(pack.price)}` : ''}`;
 
   return (
@@ -56,7 +58,7 @@ export function Packs({ onRequest }: { onRequest: (pack: PackId) => void }) {
 
             {pack.price ? (
               <div className="spec__price">
-                <span className="spec__amount">{formatMoney(pack.price)}</span>
+                <span className="spec__amount">{formatMoney(String(shownPrice))}</span>
                 <span className="spec__terms">
                   {t.oneOff} · {t.noSub}
                 </span>

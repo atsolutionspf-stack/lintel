@@ -8,7 +8,7 @@ import { site } from '../config/site';
  */
 const STAGES = webPacks.slice(0, 3).map((p) => p.name);
 
-export function HeroBlueprint() {
+export function HeroBlueprint({ focus = null }: { focus?: number | null }) {
   const p = site.preview;
   const [stage, setStage] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -24,6 +24,13 @@ export function HeroBlueprint() {
     const id = setInterval(() => setStage((s) => (s + 1) % 3), 2800);
     return () => clearInterval(id);
   }, [paused]);
+
+  // Si el visitante elige una necesidad en la portada, el plano dibuja ese pack.
+  useEffect(() => {
+    if (focus === null) return;
+    setStage(focus);
+    setPaused(true);
+  }, [focus]);
 
   const onMove = (e: PointerEvent) => {
     if (e.pointerType !== 'mouse' || !ref.current) return;
