@@ -6,7 +6,7 @@ import { pick } from '../i18n';
 
 /* Datos comunes a los dos idiomas */
 const shared = {
-  name: 'Lintel',
+  name: 'Dintel',
   /** Email que recibe las solicitudes. */
   email: 'lintelwebs@gmail.com',
   /**

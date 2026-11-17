@@ -1,5 +1,5 @@
 /**
- * Intro de entrada: «entrar a través de Lintel».
+ * Intro de entrada: «entrar a través de Dintel».
  *
  * El símbolo real (viga y jamba cobalto, cuadrado de luz ámbar; geometría en config/logo.ts)
  * es la estructura. En su hueco hay dos hojas de puerta cobalto; el cuadrado ámbar está sobre

@@ -4,19 +4,21 @@ Instrucciones para trabajar en este repositorio. Léelas antes de cambiar nada.
 
 ## Qué es
 
-**Lintel** es el estudio de AT Solutions que vende webs para **cualquier negocio** (no solo restaurantes). Esta es su web: una *one page* en español e inglés con cuatro packs (Simple, Avanzada, Profesional y Personalizada), la hora de mantenimiento y un formulario de contacto.
+**Dintel** (antes Lintel; cambio de nombre el 17/11/2026) es el estudio de AT Solutions que vende webs para **cualquier negocio** (no solo restaurantes). Esta es su web: una *one page* en español e inglés con cuatro packs (Simple, Avanzada, Profesional y Personalizada), la hora de mantenimiento y un formulario de contacto.
 
-- Lintel es una marca **separada** de **Clientia** (antes EasyHost), el software TPV y CRM. Clientia solo aparece en la tarjeta «¿Eres un restaurante?», en Servicios adicionales (no va dentro de ningún pack).
+- Dintel es una marca **separada** de **Clientia** (antes EasyHost), el software TPV y CRM. Clientia solo aparece en la tarjeta «¿Eres un restaurante?», en Servicios adicionales (no va dentro de ningún pack).
 - La web de Clientia es otro proyecto: repositorio `atsolutionspf-stack/EasyHost`, publicada en https://easyhost.atsolutionspf.workers.dev.
 
 ## Dónde vive la web
+
+La infraestructura conserva el nombre antiguo: Worker `lintel`, URL `lintel.atsolutionspf.workers.dev`, repositorio `atsolutionspf-stack/lintel` y correo `lintelwebs@gmail.com`. Cambiarlos rompe enlaces y el formulario: hazlo solo cuando lo pidan.
 
 Hay **dos versiones publicadas** con el mismo contenido. Antes de cambiar algo, pregunta cuál hay que tocar si no está claro.
 
 | Versión | Dónde se edita | Publicada en |
 | --- | --- | --- |
 | Código (este repo) | Vite + React + TypeScript | https://lintel.atsolutionspf.workers.dev (Cloudflare Worker `lintel`) |
-| Framer | Proyecto «Lintel» en el workspace de Framer de GIO | https://early-galaxy-770441.framer.app |
+| Framer | Proyecto «Lintel» en el workspace de Framer de GIO (sigue con el nombre antiguo) | https://early-galaxy-770441.framer.app |
 
 **Rediseño (9/11/2026):** portada oscura con el plano animado, cinta con lo que incluyen los packs, pack Avanzada «Recomendado» con plazos de entrega, comparativa, «Cómo trabajamos», preguntas frecuentes y contacto oscuro como cierre. **Las dos versiones (código y Framer) tienen el mismo diseño.** Si cambias una, avisa de que la otra queda desactualizada.
 
@@ -66,7 +68,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 - **Sin datos inventados:** nada de testimonios, cifras de clientes, ejemplos de webs hechas, teléfonos ni emails falsos. Lo que falte va como placeholder entre corchetes (`[Teléfono de contacto]`) o con dominio `.example`.
 - **Textos generales**, para cualquier negocio: «tu negocio», «catálogo», «reservas y citas». No vuelvas a hablar solo de restaurantes.
 - **Marca «Escuadra» (manual de marca v2.0, 13/11/2026):** paleta cobalto `#2340C8` (principal, confianza) · hormigón `#E7E8E4` (apoyo, orden) · ámbar `#FFB547` (acción: botones con texto en tinta `#12141C`), proporción 60 · 30 · 10. Tipografías: Unbounded (logo y titulares), Manrope (texto), IBM Plex Mono (datos y cotas). El ámbar no se usa como texto sobre claro: para eso está `#8A5700`. Usa siempre los tokens de `src/styles/tokens.css`.
-- **Logotipo:** el símbolo «Escuadra» (viga + jamba en cobalto y un cuadrado de luz en ámbar) y el nombre siempre en minúscula, «lintel», en Unbounded. Está en `src/components/Nav.tsx` y `public/favicon.svg`. Manual de marca: https://claude.ai/artifact/GKUCsupiQc4JHcnH52Eq7i
+- **Logotipo:** el símbolo «Escuadra» (viga + jamba en cobalto y un cuadrado de luz en ámbar) y el nombre siempre en minúscula, «dintel», en Unbounded. Está en `src/components/Nav.tsx` y `public/favicon.svg`. Manual de marca: https://claude.ai/artifact/GKUCsupiQc4JHcnH52Eq7i
 - **Responsive:** la web debe verse bien de 375 px a 1440 px, sin scroll horizontal. Compruébalo en el navegador después de cambios visuales.
 - **Accesibilidad:** etiquetas visibles en el formulario, foco visible, y `prefers-reduced-motion` respetado.
 
@@ -79,10 +81,10 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 ## Pendiente
 
 - Teléfono real (`src/config/site.ts`). El email de contacto es `lintelwebs@gmail.com`.
-- Dominio definitivo (libres a 5/11/2026: `lintelstudio.com`, `lintelwebs.com`) en `index.html` y `en/index.html`.
+- Dominio definitivo para Dintel (por elegir y comprobar) en `index.html` y `en/index.html`; ahora usan `www.dintel.example`.
 - Textos legales.
 - Avanzada: qué «otras ventajas» incluye además de reservas, pedidos y catálogo.
-- Clientia vende el add-on «Página web propia conectada» a +29 €/mes y dice que la web se diseña con Lintel; en Lintel las webs son de pago único. Falta decidir cómo se combinan y explicarlo igual en las dos webs.
+- Clientia vende el add-on «Página web propia conectada» a +29 €/mes y dice que la web se diseña con Lintel (ahora Dintel); en Dintel las webs son de pago único. Falta decidir cómo se combinan y explicarlo igual en las dos webs.
 - Decidir cuál de las dos versiones (Cloudflare o Framer) es la principal y retirar la otra.
 
 ## Cómo trabajar
