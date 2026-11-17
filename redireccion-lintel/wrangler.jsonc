@@ -1,0 +1,7 @@
+// Redirección permanente de la dirección antigua (Worker `lintel`) a la nueva (Worker `dintel`).
+// Se publica aparte: cd redireccion-lintel && npx wrangler deploy
+{
+  "name": "lintel",
+  "main": "index.js",
+  "compatibility_date": "2025-10-01"
+}

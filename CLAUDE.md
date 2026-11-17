@@ -11,13 +11,13 @@ Instrucciones para trabajar en este repositorio. Léelas antes de cambiar nada.
 
 ## Dónde vive la web
 
-La infraestructura conserva el nombre antiguo: Worker `lintel`, URL `lintel.atsolutionspf.workers.dev`, repositorio `atsolutionspf-stack/lintel` y correo `lintelwebs@gmail.com`. Cambiarlos rompe enlaces y el formulario: hazlo solo cuando lo pidan.
+La web se publica en el Worker `dintel` (https://dintel.atsolutionspf.workers.dev, desde el 17/11/2026). La dirección antigua, `lintel.atsolutionspf.workers.dev`, es ahora un Worker aparte (`redireccion-lintel/`) que redirige con 301 a la misma página en la nueva; no lo borres mientras haya enlaces antiguos circulando. Conservan el nombre antiguo el repositorio `atsolutionspf-stack/lintel` y el correo `lintelwebs@gmail.com` (cambiarlo rompe el formulario).
 
 Hay **dos versiones publicadas** con el mismo contenido. Antes de cambiar algo, pregunta cuál hay que tocar si no está claro.
 
 | Versión | Dónde se edita | Publicada en |
 | --- | --- | --- |
-| Código (este repo) | Vite + React + TypeScript | https://lintel.atsolutionspf.workers.dev (Cloudflare Worker `lintel`) |
+| Código (este repo) | Vite + React + TypeScript | https://dintel.atsolutionspf.workers.dev (Cloudflare Worker `dintel`) |
 | Framer | Proyecto «Lintel» en el workspace de Framer de GIO (sigue con el nombre antiguo) | https://early-galaxy-770441.framer.app |
 
 **Rediseño (9/11/2026):** portada oscura con el plano animado, cinta con lo que incluyen los packs, pack Avanzada «Recomendado» con plazos de entrega, comparativa, «Cómo trabajamos», preguntas frecuentes y contacto oscuro como cierre. **Las dos versiones (código y Framer) tienen el mismo diseño.** Si cambias una, avisa de que la otra queda desactualizada.
@@ -30,7 +30,7 @@ En Framer, el plano de los packs es un componente de código (`PacksBlueprint.ts
 npm install
 npm run dev       # desarrollo
 npm run build     # comprueba tipos (tsc) y genera /dist
-npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
+npx wrangler deploy   # publica /dist en el Worker `dintel` de Cloudflare
 ```
 
 `npm run build` debe pasar sin errores antes de cualquier commit o despliegue.
@@ -55,7 +55,7 @@ npx wrangler deploy   # publica /dist en el Worker `lintel` de Cloudflare
 | Colores, tipografía y espaciados | `src/styles/tokens.css` |
 | SEO y dominio | `index.html` (español) y `en/index.html` (inglés) |
 | Páginas legales | `public/aviso-legal/`, `public/politica-de-*/`, `public/en/*/` |
-| Despliegue | `wrangler.jsonc` |
+| Despliegue | `wrangler.jsonc` (web) y `redireccion-lintel/` (dirección antigua → nueva) |
 
 ## Reglas del proyecto
 
