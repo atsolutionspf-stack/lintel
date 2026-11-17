@@ -11,7 +11,7 @@ Instrucciones para trabajar en este repositorio. Léelas antes de cambiar nada.
 
 ## Dónde vive la web
 
-La web se publica en el Worker `dintel` (https://dintel.atsolutionspf.workers.dev, desde el 17/11/2026). La dirección antigua, `lintel.atsolutionspf.workers.dev`, es ahora un Worker aparte (`redireccion-lintel/`) que redirige con 301 a la misma página en la nueva; no lo borres mientras haya enlaces antiguos circulando. Conservan el nombre antiguo el repositorio `atsolutionspf-stack/lintel` y el correo `lintelwebs@gmail.com` (cambiarlo rompe el formulario).
+La web se publica en el Worker `dintel` (https://dintel.atsolutionspf.workers.dev, desde el 17/11/2026). La dirección antigua, `lintel.atsolutionspf.workers.dev`, es ahora un Worker aparte (`redireccion-lintel/`) que redirige con 301 a la misma página en la nueva; no lo borres mientras haya enlaces antiguos circulando. Conserva el nombre antiguo el repositorio `atsolutionspf-stack/lintel`.
 
 Hay **dos versiones publicadas** con el mismo contenido. Antes de cambiar algo, pregunta cuál hay que tocar si no está claro.
 
@@ -51,7 +51,7 @@ npx wrangler deploy   # publica /dist en el Worker `dintel` de Cloudflare
 | Cómo trabajamos | `src/components/Process.tsx` (textos en `site.process`) |
 | Preguntas frecuentes | `src/components/Faq.tsx` (textos en `site.faq`) |
 | Servicios adicionales: hora de mantenimiento y tarjeta de Clientia | `src/components/Maintenance.tsx` |
-| Envío del formulario (FormSubmit → correo a lintelwebs@gmail.com) | `src/lib/contact.ts`, `formEndpoint` en `src/config/site.ts` |
+| Envío del formulario (FormSubmit → correo a dintel.at@gmail.com) | `src/lib/contact.ts`, `formEndpoint` en `src/config/site.ts` |
 | Colores, tipografía y espaciados | `src/styles/tokens.css` |
 | SEO y dominio | `index.html` (español) y `en/index.html` (inglés) |
 | Páginas legales | `public/aviso-legal/`, `public/politica-de-*/`, `public/en/*/` |
@@ -80,7 +80,7 @@ npx wrangler deploy   # publica /dist en el Worker `dintel` de Cloudflare
 
 ## Pendiente
 
-- Teléfono real (`src/config/site.ts`). El email de contacto es `lintelwebs@gmail.com`.
+- Teléfono real (`src/config/site.ts`). El email de contacto es `dintel.at@gmail.com` (desde el 17/11/2026; antes lintelwebs@gmail.com). Si se cambia, FormSubmit pide activar el nuevo correo con el primer envío.
 - Dominio definitivo para Dintel (por elegir y comprobar) en `index.html` y `en/index.html`; ahora usan `www.dintel.example`.
 - Textos legales.
 - Avanzada: qué «otras ventajas» incluye además de reservas, pedidos y catálogo.

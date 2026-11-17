@@ -8,13 +8,13 @@ import { pick } from '../i18n';
 const shared = {
   name: 'Dintel',
   /** Email que recibe las solicitudes. */
-  email: 'lintelwebs@gmail.com',
+  email: 'dintel.at@gmail.com',
   /**
    * Servicio que envía las solicitudes del formulario por correo (FormSubmit, sin cuenta).
    * La primera solicitud manda un correo de activación a `email`: hay que pulsar «Activate» una vez.
    * Si es `null`, el formulario abre el correo del visitante con la solicitud ya redactada.
    */
-  formEndpoint: 'https://formsubmit.co/ajax/lintelwebs@gmail.com' as string | null,
+  formEndpoint: 'https://formsubmit.co/ajax/dintel.at@gmail.com' as string | null,
   /**
    * Web de Clientia (TPV y CRM), para el bloque «¿Eres un restaurante?» (cada idioma enlaza a su versión).
    * Sustituye por el dominio definitivo cuando lo haya.
